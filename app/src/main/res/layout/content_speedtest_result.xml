@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dip"
+    android:shrinkColumns="0,3"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/fragment_speedtest"    >
+
+    <TableRow android:layout_height="match_parent"
+        android:background="@drawable/shape_top_corner_no_bottom_line"
+        android:layout_width="match_parent"
+        android:visibility="gone">
+        <TextView android:text="工单号:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+        <TextView android:id="@+id/textview_speedtest_result_worksheetnum"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+         <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_tableline"
+            android:contentDescription="@null" />
+        <TextView android:text="线务员工号:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+        <TextView android:id="@+id/textview_speedtest_result_userid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+<!--        <TextView android:text="序列号:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+        <TextView android:id="@+id/textview_serialnumber"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />-->
+    </TableRow>
+
+    <TableRow android:layout_height="wrap_content"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:visibility="gone">
+        <TextView android:text="上网账号:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+        <TextView android:id="@+id/textview_speedtest_result_useraccount"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_tableline"
+            android:contentDescription="@null" />
+        <TextView android:text="设备编号:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+        <TextView android:id="@+id/textview_speedtest_result_devicenumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+    </TableRow>
+
+    <TableRow android:layout_height="wrap_content"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:visibility="gone">
+        <TextView android:text="体验下行带宽"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+        <TextView android:id="@+id/textview_speedtest_result_paydownspeed"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_tableline"
+            android:contentDescription="@null" />
+
+        <TextView android:text="体验上行带宽"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+
+        <TextView android:id="@+id/textview_speedtest_result_payupspeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+    </TableRow>
+
+    <TableRow android:layout_height="match_parent"
+        android:background="@drawable/shape_top_corner_no_bottom_line"
+        android:layout_width="match_parent">
+        <TextView android:text="平均下行带宽"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+        <TextView android:id="@+id/textview_speedtest_result_avgspeed"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_tableline"
+            android:contentDescription="@null" />
+
+        <TextView android:text="平均上行带宽"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+
+        <TextView android:id="@+id/textview_speedtest_result_avgupspeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+    </TableRow>
+
+    <TableRow
+        android:id = "@+id/tablerow_speedtest_result_peakspeed"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:layout_width="match_parent">
+        <TextView android:text="最大下行带宽"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+        <TextView android:id="@+id/textview_speedtest_result_peakspeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_tableline"
+            android:contentDescription="@null" />
+
+        <TextView android:text="最大上行带宽"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+
+        <TextView android:id="@+id/textview_speedtest_result_peakupspeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+    </TableRow>
+
+    <TableRow android:layout_height="match_parent"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:layout_width="match_parent">
+        <TextView android:text="测试结论:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+        <TextView android:id="@+id/textview_speedtest_result_speedresult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:layout_span="4"/>
+    </TableRow>
+
+    <TableRow android:layout_height="wrap_content"
+        android:background="@drawable/shape_bottom_corner_no_top_line" >
+        <TextView android:text="测试时间:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            tools:ignore="HardcodedText" />
+
+        <TextView android:id="@+id/textview_speedtest_result_speedtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:layout_span="4"/>
+    </TableRow>
+</TableLayout>
+

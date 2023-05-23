@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListView android:id="@+id/settings_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:divider="@color/gray_btn_bg_pressed_color"
+        android:dividerHeight="1dip"
+        android:listSelector="@color/material_deep_teal_20"
+    />
+    <LinearLayout
+        android:id="@+id/setting_llyt_speedtest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <include layout="@layout/content_setting_speedtest" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/setting_llyt_hxinfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <include layout="@layout/content_hxinfo"  />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/setting_llyt_boxinfo"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/content_boxinfo"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/setting_llyt_filemanager"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/content_filemanager"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/setting_llyt_logexport"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/content_logexport"/>
+    </LinearLayout>
+
+</FrameLayout>

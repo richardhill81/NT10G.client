@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sourceIP">源IP地址:</string>
+    <string name="sourcePort">源端口:</string>
+    <string name="sourceMac">源Mac:</string>
+    <string name="destIP">目的IP地址：</string>
+    <string name="destPort">目的端口:</string>
+    <string name="destMac">目的Mac:</string>
+</resources>

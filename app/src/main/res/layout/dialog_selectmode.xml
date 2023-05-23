@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
+    android:layout_gravity="center">
+    <TableRow
+        android:paddingVertical="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_span="2"
+            android:text="测试模式选择"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="26sp"
+            tools:ignore="HardcodedText" />
+    </TableRow>
+    <TableRow
+        android:paddingVertical="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:paddingBottom="10dp"
+            android:src="@drawable/bg_line2"
+            tools:ignore="contentDescription,ImageContrastCheck" />
+    </TableRow>
+    <TableRow
+        android:paddingVertical="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+        <Button
+            tools:ignore="ButtonStyle"
+            android:id="@+id/btn_singleLanInternal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/btn_net"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/singleLanInternal" />
+        <Button
+            tools:ignore="ButtonStyle"
+            android:id="@+id/btn_singleLanExternal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/btn_chronus2"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/singleLanExternal" />
+    </TableRow>
+    <TableRow
+        android:paddingVertical="10dp"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/btn_doubleLan"
+            android:text="@string/doubleLan"
+            android:drawableTop="@drawable/btn_spore1"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            tools:ignore="ButtonStyle" />
+        <Button
+            android:id="@+id/btn_wifiDHCP"
+            android:text="@string/wifiDHCP"
+            android:drawableTop="@drawable/btn_wifi"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            tools:ignore="ButtonStyle" />
+    </TableRow>
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp">
+        <Button
+            android:id="@+id/btn_lanAndWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/btn_appshareth"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/lanAndWifi"
+            tools:ignore="ButtonStyle" />
+        <Button
+            android:id="@+id/btn_quitmode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/btn_back"
+            android:text="@string/quit"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            />
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_iTVSimulate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/btn_tvforecast"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/iTVSimulate"
+            tools:ignore="ButtonStyle" />
+    </TableRow>
+</TableLayout>

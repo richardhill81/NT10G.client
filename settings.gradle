@@ -1,0 +1,4 @@
+include ':app'
+//project (':CommonLibrary').projectDir = new File('../CommonLibrary/')
+//include ':CommonLibrary:BoxLibrary'
+//include ':CommonLibrary:alertdialoglibrary'

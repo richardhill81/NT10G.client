@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background" >
+    <LinearLayout
+        android:id="@+id/ll_accessType"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/login_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="连接方式选择"
+            android:textAlignment="center"
+            android:paddingTop="20dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25dp"
+            tools:ignore="HardcodedText" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_line2"
+            android:paddingBottom="20dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/btn_access_dhcp"
+                android:text="@string/access_dhcp"
+                android:drawableTop="@drawable/btn_dhcp"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/btn_access_pppoe"
+                android:text="@string/access_pppoe"
+                android:drawableTop="@drawable/btn_pppoe"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/btn_access_static"
+                android:text="@string/access_static"
+                android:drawableTop="@drawable/btn_static"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                tools:ignore="ButtonStyle" />
+            <Button
+                android:id="@+id/btn_back"
+                android:text="返回"
+                android:drawableTop="@drawable/btn_back"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                tools:ignore="ButtonStyle,HardcodedText" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_accessDetail"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <LinearLayout
+            android:id="@+id/ll_static_view"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+            <LinearLayout android:id="@+id/ll_static_ip"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="#003366"
+                    android:textSize="20dip"
+                    android:layout_weight="3"
+                    android:layout_marginTop="3px"
+                    android:paddingRight="10dp"
+                    android:text="@string/ipAddress"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                <EditText
+                    android:id="@+id/Edit_static_ip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5px"
+                    android:layout_marginTop="3px"
+                    tools:ignore="RtlHardcoded,TextFields" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/ll_staic_netmask"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="#003366"
+                    android:textSize="20dip"
+                    android:layout_weight="3"
+                    android:paddingRight="10dp"
+                    android:text="@string/netMask"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                <EditText
+                    android:id="@+id/Edit_static_netmask"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5px"
+                    android:layout_weight="1"
+                    tools:ignore="RtlHardcoded,TextFields" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/ll_staic_gateway"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="#003366"
+                    android:textSize="20dip"
+                    android:layout_weight="3"
+                    android:paddingRight="10dp"
+                    android:text="@string/gateWay"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                <EditText
+                    android:id="@+id/Edit_static_gateway"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5px"
+                    android:layout_weight="1"
+                    tools:ignore="RtlHardcoded,TextFields" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/ll_staic_dns"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="#003366"
+                    android:textSize="20dip"
+                    android:layout_weight="3"
+                    android:paddingRight="10dp"
+                    android:text="@string/DNS"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                <EditText
+                    android:id="@+id/Edit_static_dns"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5px"
+                    android:layout_weight="1"
+                    tools:ignore="RtlHardcoded,TextFields" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_pppoe_view"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+            <LinearLayout android:id="@+id/ll_pppoe_account"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="#003366"
+                    android:paddingRight="10dp"
+                    android:textSize="20dip"
+                    android:layout_weight="3"
+                    android:text="@string/pppoeAccount"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+                <EditText
+                    android:id="@+id/Edit_pppoe_account"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5px"
+                    android:layout_weight="1"
+                    android:layout_marginTop="3px"
+                    tools:ignore="RtlHardcoded,TextFields" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/ll_pppoe_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="#003366"
+                    android:textSize="20dip"
+                    android:layout_weight="3"
+                    android:paddingRight="10dp"
+                    android:text="@string/pppoePassword"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                <EditText
+                    android:id="@+id/Edit_pppoe_password"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="5px"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    tools:ignore="RtlHardcoded" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/btn_access_submit"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:padding="15dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="          "
+                tools:ignore="HardcodedText" />
+            <Button
+                android:id="@+id/btn_access_back"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="返 回"
+                android:padding="15dp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

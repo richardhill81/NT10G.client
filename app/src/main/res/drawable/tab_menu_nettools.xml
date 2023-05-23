@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_selected="true"
+        android:drawable="@mipmap/ic_nettools_s"
+        android:color= "@color/software_textColor_selected"/>
+    <item
+        android:drawable="@mipmap/ic_nettools"
+        android:color= "@color/software_textColor_unselected"/>
+</selector>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dip"
+    android:shrinkColumns="1">
+    <TableRow android:layout_height="wrap_content"
+        android:background="@drawable/shape_top_corner_no_bottom_line" >
+        <TextView android:text="公网IP "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"/>
+        <TextView android:id="@+id/textview_speedtest_result_clientIp_jiangsu10000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </TableRow>
+    <TableRow android:layout_height="wrap_content"
+        android:background="@drawable/shape_no_corner_without_bottom" >
+        <TextView android:text="公网端口 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"   />
+        <TextView android:id="@+id/textview_speedtest_result_clientPort_jiangsu10000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+    </TableRow>
+    <TableRow android:layout_height="wrap_content"
+        android:background="@drawable/shape_no_corner_without_bottom" >
+        <TextView android:text="地市 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+        <TextView android:id="@+id/textview_speedtest_result_cityName_jiangsu10000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+
+    </TableRow>
+    <TableRow android:layout_height="wrap_content"
+        android:background="@drawable/shape_no_corner_without_bottom" >
+
+
+        <TextView android:text="账号 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"   />
+
+        <TextView android:id="@+id/textview_speedtest_result_broadbandAccount_jiangsu10000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+    </TableRow>
+    <TableRow android:layout_height="match_parent"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:layout_width="match_parent">
+        <TextView android:text="承诺下行带宽 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+        <TextView android:id="@+id/textview_speedtest_result_contractRate_jiangsu10000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+
+    </TableRow>
+
+    <TableRow android:layout_height="match_parent"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:layout_width="match_parent">
+        <TextView android:text="承诺上行带宽 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"   />
+
+        <TextView android:id="@+id/textview_speedtest_result_upRate_jiangsu10000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+    </TableRow>
+
+    <TableRow android:layout_height="match_parent"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:layout_width="match_parent">
+        <TextView android:text="上行测速服务器 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"   />
+
+        <TextView android:id="@+id/textview_speedtest_upRate_server"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+    </TableRow>
+
+    <TableRow android:layout_height="match_parent"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:layout_width="match_parent">
+        <TextView android:text="下行测速服务器 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"   />
+
+        <TextView android:id="@+id/textview_speedtest_contractRate_server"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+    </TableRow>
+
+    <TableRow android:layout_height="match_parent"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:layout_width="match_parent">
+        <TextView android:text="下行平均速度 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+        <TextView android:id="@+id/textview_speedtest_result_avgdownspeed_jiangsu10000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+
+    </TableRow>
+
+    <TableRow android:layout_height="match_parent"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:layout_width="match_parent">
+        <TextView android:text="下行峰值速度 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+        <TextView android:id="@+id/textview_speedtest_result_maxdownspeed_jiangsu10000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+
+    </TableRow>
+
+    <TableRow android:layout_height="match_parent"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:layout_width="match_parent">
+
+
+        <TextView android:text="上行平均速度 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"   />
+
+        <TextView android:id="@+id/textview_speedtest_result_avgupspeed_jiangsu10000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+    </TableRow>
+
+
+    <TableRow android:layout_height="match_parent"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:layout_width="match_parent">
+
+
+        <TextView android:text="上行峰值速度 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"   />
+
+        <TextView android:id="@+id/textview_speedtest_result_maxupspeed_jiangsu10000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+    </TableRow>
+
+    <TableRow android:layout_height="wrap_content"
+        android:background="@drawable/shape_no_corner_without_bottom"
+        android:layout_width="match_parent"
+        >
+        <TextView android:text="测试结果 "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+        <TextView android:id="@+id/textview_speedtest_result_state_jiangsu10000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+
+    </TableRow>
+    <TableRow android:layout_height="wrap_content"
+        android:background="@drawable/shape_bottom_corner_no_top_line" >
+        <TextView android:text="测试时间 "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip" />
+
+        <TextView android:id="@+id/textview_speedtest_result_speedtime_jiangsu10000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            />
+    </TableRow>
+</TableLayout>
+

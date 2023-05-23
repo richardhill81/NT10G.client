@@ -1,0 +1,132 @@
+apply plugin: 'com.android.application'
+//apply plugin: 'android-apt'
+
+//打包时间
+static def releaseTime() {
+    return new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("GMT+08:00"))
+}
+
+def root = rootProject.ext
+def cfg = root.android
+//def dpc = root.dependencies
+
+//加载签名配置
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+android {
+    compileSdkVersion cfg.compileSdkVersion
+    defaultConfig {
+        applicationId cfg.applicationId
+        minSdkVersion cfg.minSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+        flavorDimensions cfg.flavorDimensions
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(properties.getProperty("keystore.storeFile"))
+            storePassword properties.getProperty("keystore.storePassword")
+            keyAlias properties.getProperty("keystore.keyAlias")
+            keyPassword properties.getProperty("keystore.keyPassword")
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def fileName = "client_${variant.versionName}_${releaseTime()}.apk"
+            if (variant.buildType.name.equals('release')) {
+                variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/Release/" + versionName)
+                fileName = "client_${variant.versionName}_${releaseTime()}_release.apk"
+            }
+            outputFileName = fileName
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+            resValue "string", "app_name", "nt10g-Debug"
+        }
+    }
+
+    flavorDimensions "myflavor"
+
+    productFlavors {
+        common {
+            dimension "myflavor"
+            resValue "string", "app_name", "万兆测速"
+            versionNameSuffix "_common"
+        }
+        /*sh10000{
+            dimension "myflavor"
+            resValue "string", "app_name", "上海电信网络助手"
+            versionNameSuffix "_sh10000"
+        }
+        js10000 {
+            dimension "myflavor"
+            resValue "string", "app_name", "江苏电信网络助手"
+            versionNameSuffix "_js10000"
+        }
+        ah10086{
+            dimension "myflavor"
+            resValue "string", "app_name", "安徽移动网络助手"
+            versionNameSuffix "_ah10086"
+        }*/
+        debugtest{
+            dimension "myflavor"
+            resValue "string", "app_name", "万兆测速DebugTest"
+            versionNameSuffix "_debugtest"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    namespace 'com.shwangce.nt10g.client'
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
+    }
+
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name.contains("ReleaseApkListingFileRedirect")) { // 过滤release
+        task.enabled = false
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //implementation project(':CommonLibrary:alertdialoglibrary')
+    //implementation project(':CommonLibrary:BoxLibrary')
+    //implementation project(':libzxing')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+
+    //compile 'com.google.android.gms:play-services-appindexing:9.8.0'
+    //implementation 'com.google.firebase:firebase-appindexing:10.0.0'
+    implementation 'com.google.firebase:firebase-appindexing:20.0.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.3.8'
+    implementation 'com.pnikosis:materialish-progress:1.0'
+    implementation 'com.android.support:support-annotations:28.0.0'
+    testImplementation 'junit:junit:4.13.2'
+}

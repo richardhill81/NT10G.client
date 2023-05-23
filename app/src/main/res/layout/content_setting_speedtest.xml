@@ -1,0 +1,235 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选择测速方式"
+            android:textAlignment="center"
+            android:paddingTop="20dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RadioGroup
+                    android:id="@+id/testsource_radiogroup1"
+                    android:contentDescription="测速方式"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+                    <RadioButton
+                        android:id="@+id/testsource_radio_hxbox"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="上海电信测速"
+                        android:textColor="@color/colorPrimary" />
+
+                    <RadioButton
+                        android:id="@+id/testsource_radio_gd10000"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/gd10000" />
+                </RadioGroup>
+                <RadioGroup
+                    android:id="@+id/testsource_radiogroup2"
+                    android:contentDescription="测速方式"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+                    <RadioButton
+                        android:id="@+id/testsource_radio_hunandx"
+                        android:visibility="gone"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textColor="@color/colorPrimary"
+                        android:text="湖南电信测速"/>
+                    <RadioButton
+                        android:id="@+id/testsource_radio_speedtest"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textColor="@color/colorPrimary"
+                        android:text="SpeedTest测速"/>
+                </RadioGroup>
+                <RadioGroup
+                    android:id="@+id/testsource_radiogroup3"
+                    android:contentDescription="测速方式"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <RadioButton
+                        android:id="@+id/testsource_radio_http"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textColor="@color/colorPrimary"
+                        android:text="HTTP测速"/>
+                    <RadioButton
+                        android:id="@+id/testsource_radio_ftp"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textColor="@color/colorPrimary"
+                        android:text="FTP测速"/>
+                </RadioGroup>
+                <RadioGroup
+                    android:id="@+id/testsource_radiogroup4"
+                    android:contentDescription="测速方式"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+                    <RadioButton
+                        android:id="@+id/testsource_radio_jiangsu"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="江苏电信测速"
+                        android:textColor="@color/colorPrimary" />
+
+
+                </RadioGroup>
+            </LinearLayout>
+            <LinearLayout
+                android:id = "@+id/testsource_http_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="下载地址："  />
+                    <EditText
+                        android:id = "@+id/testsource_edittext_httpdownloadUrl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:inputType="textUri"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="上传地址："  />
+                    <EditText
+                        android:id = "@+id/testsource_edittext_httpuploadUrl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:inputType="textUri"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id = "@+id/testsource_ftp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="下载地址：" />
+
+                    <EditText
+                        android:id="@+id/testsource_edittext_ftpUrl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textUri"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="用户名:"/>
+                    <EditText
+                        android:id="@+id/testsource_edittext_ftpUserName"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="密码:"/>
+                    <EditText
+                        android:id="@+id/testsource_edittext_ftpPassword"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/testsource_button_submit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#ff336699"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:text="保存"
+                android:textSize="20dp"/>
+            <Button
+                android:id="@+id/testsource_button_back"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#ff336699"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:text="返回"
+                android:textSize="20dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,86 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".client.main.MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/content_deviceinfo"
+            android:id="@+id/content_deviceinfo" />
+        <LinearLayout
+            android:id="@+id/ly_tab_menu"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tab_menu_testspeed"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:paddingTop="10dp"
+                android:drawableTop="@drawable/tab_menu_testspeed"
+                android:drawablePadding="-5dp"
+                android:textColor="@drawable/tab_menu_testspeed"
+                android:gravity="center"
+                android:text="测速" />
+            <TextView
+                android:id="@+id/tab_menu_nettoolstest"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/tab_menu_nettools"
+                android:drawablePadding="-5dp"
+                android:textColor="@drawable/tab_menu_nettools"
+                android:gravity="center"
+                android:text="工具"/>
+            <TextView
+                android:id="@+id/tab_menu_iptvtest"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/tab_menu_iptvtest"
+                android:drawablePadding="-5dp"
+                android:textColor="@drawable/tab_menu_iptvtest"
+                android:gravity="center"
+                android:text="IPTV"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tab_menu_setting"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/tab_menu_setting"
+                android:drawablePadding="-5dp"
+                android:textColor="@drawable/tab_menu_setting"
+                android:gravity="center"
+                android:text="设置"/>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/div_tab_bar"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_above="@id/ly_tab_menu"
+            android:background="@android:color/darker_gray" />
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/div_tab_bar"
+            android:layout_below="@id/content_deviceinfo"
+            android:layout_alignParentStart="true"
+            android:background="@android:color/transparent" />
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

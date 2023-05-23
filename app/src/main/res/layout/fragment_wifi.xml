@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/fragment_wifi_tx_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="]"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="26sp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_line2"/>
+        </LinearLayout>
+        <ListView
+            android:id="@+id/wifi_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:layout_marginTop="10dp"
+            android:divider="@color/gray_btn_bg_pressed_color"
+            android:dividerHeight="1dip"
+            android:listSelector="@color/material_deep_teal_20" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/wifilist_btn_scan"
+                android:text="@string/scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+            <Button
+                android:id="@+id/wifilist_btn_close"
+                android:text="@string/close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    <!--    <TextView
+            android:id="@+id/nettools_textview_pingtest"
+            android:text="Ping"
+            android:textSize="20sp"
+            android:layout_below="@id/nettools_listview_tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"/>
+        <TextView
+            android:id="@+id/nettools_textview_traceroute"
+            android:text="Traceroute"
+            android:textSize="20sp"
+            android:layout_below="@id/nettools_textview_pingtest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"/>-->
+    </LinearLayout>
+</FrameLayout>
