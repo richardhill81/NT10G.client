@@ -95,7 +95,7 @@ public static ** valueOf(java.lang.String);
 }
 
 
--keep class cn.pedant.SweetAlert.** { *;}
+-keep class com.shwangce.nt10g.client.sweetalert.** { *;}
 
 -keep class com.shwangce.nt10g.client.library.** {*;}
 #butterknife不混淆

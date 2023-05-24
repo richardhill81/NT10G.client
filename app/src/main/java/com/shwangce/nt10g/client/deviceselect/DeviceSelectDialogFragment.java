@@ -23,8 +23,10 @@ import android.widget.Toast;
 
 import com.shwangce.nt10g.client.BaseDialogFragment;
 import com.shwangce.nt10g.client.R;
+import com.shwangce.nt10g.client.library.WorkUtils;
 import com.shwangce.nt10g.client.library.bluetoothLe.DeviceBean;
 import com.shwangce.nt10g.client.sweetalert.SweetAlertDialog;
+import com.shwangce.nt10g.client.util.Log;
 import com.shwangce.nt10g.client.util.ProjectUtil;
 import com.shwangce.nt10g.client.util.SharedPreferencesUtil;
 
@@ -325,7 +327,7 @@ public class DeviceSelectDialogFragment extends BaseDialogFragment implements De
         btn_scanQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(getActivity(), CaptureActivity.class), 0);
+                //startActivityForResult(new Intent(getActivity(), CaptureActivity.class), 0);
                 //mPresenter.doConnectDeviceByName("NT201L_88:03:79");
                 //mPresenter.doConnectDeviceByMac("20:C3:8F:88:03:79");
             }

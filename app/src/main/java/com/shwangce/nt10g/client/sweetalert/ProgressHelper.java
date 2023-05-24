@@ -3,6 +3,7 @@ package com.shwangce.nt10g.client.sweetalert;
 import android.content.Context;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
+import com.shwangce.nt10g.client.R;
 
 public class ProgressHelper {
     private ProgressWheel mProgressWheel;
@@ -19,13 +20,13 @@ public class ProgressHelper {
     public ProgressHelper(Context ctx) {
         mToSpin = true;
         mSpinSpeed = 0.75f;
-        mBarWidth = ctx.getResources().getDimensionPixelSize(cn.pedant.SweetAlert.R.dimen.common_circle_width) + 1;
-        mBarColor = ctx.getResources().getColor(cn.pedant.SweetAlert.R.color.success_stroke_color);
+        mBarWidth = ctx.getResources().getDimensionPixelSize(R.dimen.common_circle_width) + 1;
+        mBarColor = ctx.getResources().getColor(R.color.success_stroke_color);
         mRimWidth = 0;
         mRimColor = 0x00000000;
         mIsInstantProgress = false;
         mProgressVal = -1;
-        mCircleRadius = ctx.getResources().getDimensionPixelOffset(cn.pedant.SweetAlert.R.dimen.progress_circle_radius);
+        mCircleRadius = ctx.getResources().getDimensionPixelOffset(R.dimen.progress_circle_radius);
     }
 
     public ProgressWheel getProgressWheel () {

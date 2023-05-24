@@ -3,6 +3,7 @@ package com.shwangce.nt10g.client.library.AppUpdate;
 import android.os.AsyncTask;
 import android.os.Environment;
 
+import com.google.gson.Gson;
 import com.shwangce.nt10g.client.util.Log;
 
 import java.io.File;

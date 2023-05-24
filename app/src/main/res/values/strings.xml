@@ -76,4 +76,8 @@
     <string name="rx_bandwidth">下行:</string>
     <string name="tx_bandwidth">上行:</string>
     <string name="full_space">&#12288;</string>
+    <string name="dialog_default_title">Here\'s a message!</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="LOADING">Loading...</string>
 </resources>

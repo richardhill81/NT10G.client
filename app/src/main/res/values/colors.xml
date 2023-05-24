@@ -24,4 +24,5 @@
     <color name="material_deep_teal_50">#ff009688</color>
     <color name="software_textColor_selected">#3333ff</color>
     <color name="software_textColor_unselected">#333333</color>
+    <color name="sweet_dialog_bg_color">#FFFFFF</color>
 </resources>
