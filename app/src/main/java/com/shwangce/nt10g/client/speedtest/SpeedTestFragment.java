@@ -18,6 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableRow;
@@ -331,8 +335,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
 
     //图表界面
     @BindView(R.id.include_speedchart) View content_speedchart;
-    @BindView(R.id.speedchart_linechart) LineChart lineChart;
-    @BindView(R.id.speedchart_textview_state) TextView textView_state_chart;
+    @BindView(R.id.echart_webview) WebView speedChartWebView;
 
     //指针界面
     @BindView(R.id.include_speedwheel) View content_speedwheel;
@@ -498,6 +501,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 this.testAdditional = "";
             }
         }
+        initChartView();
     }
 
     @Nullable
@@ -511,7 +515,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         updateTestKind(testKind,testAdditional);
         InitTestSpeed();
         initWheelView();
-        initialChart(lineChart);
+        initChartView();
         return view;
     }
 
@@ -560,6 +564,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 mySweetALertDialog = null;
                 break;
         }
+        speedChartWebView.evaluateJavascript("javascript:clearData()", s -> {    });
         mPresenter.startTest(testKind,testAdditional);
     }
 
@@ -689,59 +694,6 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         lastDegree = 0;
     }
 
-    // 初始化图表
-    private void initialChart(LineChart mChart) {
-        mChart.setNoDataText("暂时尚无数据");
-        mChart.setTouchEnabled(true);
-        // 可拖曳
-        mChart.setDragEnabled(true);
-        // 可缩放
-        mChart.setScaleEnabled(true);
-        mChart.setDrawGridBackground(false);
-        mChart.setPinchZoom(true);
-
-        // 设置图表的背景颜色
-        mChart.setBackgroundColor(0xfff5f5f5);
-
-        // 图表的注解(只有当数据集存在时候才生效)
-        Legend l = mChart.getLegend();
-
-        // 可以修改图表注解部分的位置
-        // l.setPosition(LegendPosition.LEFT_OF_CHART);
-
-        l.setForm(Legend.LegendForm.DEFAULT);
-
-        // 颜色
-        l.setTextColor(Color.CYAN);
-
-        // x坐标轴
-        XAxis xl = mChart.getXAxis();
-        xl.setTextColor(0xff00897b);
-        xl.setDrawGridLines(false);
-        xl.setAvoidFirstLastClipping(true);
-
-        // 如果false，那么x坐标轴将不可见
-        xl.setEnabled(true);
-
-        // 将X坐标轴放置在底部，默认是在顶部。
-        xl.setPosition(XAxis.XAxisPosition.BOTTOM);
-
-        // 图表左边的y坐标轴线
-        YAxis leftAxis = mChart.getAxisLeft();
-        leftAxis.setTextColor(0xff37474f);
-
-        // 最大值
-        leftAxis.setSpaceMax(1000f);
-        // 最小值
-        leftAxis.setSpaceMin(0f);
-
-        leftAxis.setDrawGridLines(true);
-
-        YAxis rightAxis = mChart.getAxisRight();
-        // 不显示图表的右边y坐标轴线
-        rightAxis.setEnabled(false);
-    }
-
     private void showTestSuccess(SpeedTestResultBean result) {
         switch (ProjectUtil.showSpeedType) {
             case TEXT:
@@ -828,7 +780,6 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
     }*/
 
     private void updateTestspeedInfo(int speedtype,float speed) {
-
         Log.i("speed","------"+speed);
         String speedString = "";
         String stateString = "";
@@ -850,8 +801,8 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 break;
 
             case CHART:
-                textView_state_chart.setText(stateString);
-                addEntry(lineChart,speedtype,speed);
+                //textView_state_chart.setText(stateString);
+                //addEntry(lineChart,speedtype,speed);
                 break;
 
             case NEEDLE:
@@ -914,7 +865,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 }
                 break;
             case CHART:
-                textView_state_chart.setText(titleText);
+                //textView_state_chart.setText(titleText);
                 break;
             case NEEDLE:
                 textView_state_wheel.setText(titleText);
@@ -931,7 +882,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 }
                 break;
             case CHART:
-                textView_state_chart.setText(titleText);
+                //textView_state_chart.setText(titleText);
                 break;
             case NEEDLE:
                 textView_state_wheel.setText(titleText);
@@ -1006,6 +957,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         }
     }
 
+    /*
     // 添加一个坐标点
     private void addEntry(LineChart mChart,int speedtype,float speed) {
         int lastIndex ;
@@ -1091,6 +1043,76 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         return set;
     }
 
+     */
 
+    private class EChartsWebViewClient extends WebViewClient {
 
+        private String option;
+        public EChartsWebViewClient(String option) {
+            this.option = option;
+        }
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+        }
+
+        @Override
+        public void onPageFinished(final WebView view, String url) {
+            android.util.Log.i("图表", "html加载完成 onPageFinished");
+            view.post(() -> {
+                view.loadUrl(String.format("javascript:setOption(%s)", option));
+                speedChartWebView.evaluateJavascript("javascript:clearData()", s -> {});
+            });
+            super.onPageFinished(view, url);
+        }
+
+        @Override
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            super.onReceivedError(view, request, error);
+            android.util.Log.i("图表加载出错", error.toString());
+        }
+    }
+
+    private void initChartView() {
+        speedChartWebView.loadUrl("file:///android_asset/index.html");
+        speedChartWebView.getSettings().setAllowFileAccess(true);
+        speedChartWebView.getSettings().setJavaScriptEnabled(true);
+        speedChartWebView.setHorizontalScrollBarEnabled(false);//水平不显示
+        speedChartWebView.setVerticalScrollBarEnabled(false); //垂直不显示
+        setOption(getOptionString());
+    }
+
+    private String getOptionString() {
+        return "{" +
+                "xAxis: {type: 'category',show: false}," +
+                "yAxis: {type: 'value',show: false}," +
+                "grid: { top: '80%' }," +
+                "series:[" +
+                "  {" +
+                " type: 'line'," +
+                " smooth: true," +
+                " symbol: 'none'," +
+                " seriesLayoutBy: 'row'" +
+                " }," +
+                " {" +
+                "  type: 'gauge'," +
+                "  min: 0," +
+                "  max: 1024," +
+                "  radius: '80%'," +
+                "  center: ['50%', '50%']," +
+                "  axisLine: {lineStyle: {width: 30,color: [[0.3, '#67e0e3'],[0.7, '#37a2da'],[1, '#fd666d']]}}," +
+                "  pointer: {itemStyle: {color: 'inherit'}}," +
+                "  axisTick: {distance: -30,length: 8,lineStyle: {color: '#fff',width: 2}}," +
+                "  splitLine: {distance: -30,length: 30,lineStyle: {color: '#fff',width: 4}}," +
+                "  axisLabel: {color: 'inherit',distance: 40,fontSize: 10}," +
+                "  detail: {valueAnimation: true,formatter: '{value} Mbps',color: 'inherit'}" +
+                " }" +
+                "]" +
+                "}";
+    }
+
+    private void setOption(String option){
+        speedChartWebView.loadUrl("file:///android_asset/index.html");
+        speedChartWebView.setWebViewClient(new EChartsWebViewClient(option));
+    }
 }

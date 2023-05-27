@@ -823,8 +823,8 @@ public class MainPresenter {
     }
 
     public void doDeviceSelectComplete() {
-        //mainView.showAccessDialog();
-        mainView.showModeDialog();
+        mainView.showAccessDialog();
+        //mainView.showModeDialog();
     }
 
     public void doSendCommand(String commandType,String detail) {

@@ -396,7 +396,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     private final View.OnClickListener onChangeAccesstypeClickListener = v -> {
         showAccessSelectDialog();
     };
-    @SuppressLint("SourceLockedOrientationActivity")
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -577,7 +577,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     @Override
     public void showConnected(String devicename) {
-        devicename = devicename.replace("NT201L_","");
+        devicename = devicename.replace("NT10G_","");
         connectedDeviceName = devicename;
         mainHandler.sendMessage(mainHandler.obtainMessage(ProjectUtil.MESSAGE_CONNECTED, devicename));
     }
@@ -843,6 +843,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         ProjectUtil.setModeString[2] = resources.getString(R.string.doubleLan);
         ProjectUtil.setModeString[3] = resources.getString(R.string.wifiDHCP);
         ProjectUtil.setModeString[4] = resources.getString(R.string.lanAndWifi);
+        /*
         if("js10000".equals(channel)) {
             ProjectUtil.speedTestKind = SpeedTestKind.JIANGSU10000;
             ProjectUtil.app_update_url = resources.getString(R.string.update_url_js10000);
@@ -856,7 +857,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
             ProjectUtil.app_update_url = resources.getString(R.string.update_url_test);
         } else {
             ProjectUtil.app_update_url = resources.getString(R.string.update_url);
-        }
+        }*/
+        ProjectUtil.app_update_url = resources.getString(R.string.update_url);
         appUpdate = new UpdateWork(ProjectUtil.app_update_url);
         appUpdate.setUpdateListener(new UpdateWork.OnUpdateListener() {
             @Override

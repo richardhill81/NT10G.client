@@ -132,22 +132,11 @@ public class SetAccessDialogFragment extends BaseDialogFragment implements View.
         btn_access_submit.setOnClickListener(this);
         btn_access_back.setOnClickListener(this);
         initData();
-/*
-        if(ProjectUtil.currentMode != ProjectUtil.SetModeEnum.SingleLanInternal) {
-            Timer timer = new Timer();
-            btn_access_dhcp.setVisibility(View.VISIBLE);
-            btn_access_pppoe.setVisibility(View.GONE);
-            btn_access_static.setVisibility(View.GONE);
-            btn_back.setVisibility(View.VISIBLE);
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    handler.sendEmptyMessage(MESSAGE_SETAUTODHCP);
-                }
-            },50);
-        }
-*/
-        switch (ProjectUtil.currentMode) {      //2023.05.19 linhao add
+        btn_access_dhcp.setVisibility(View.VISIBLE);
+        btn_access_static.setVisibility(View.VISIBLE);
+        btn_access_pppoe.setVisibility(View.GONE);
+        /*
+        switch (ProjectUtil.currentMode) {
             case SingleLanExternal:     //单外，显示设置dhcp和static
                 btn_access_dhcp.setVisibility(View.VISIBLE);
                 btn_access_pppoe.setVisibility(View.GONE);
@@ -173,6 +162,7 @@ public class SetAccessDialogFragment extends BaseDialogFragment implements View.
             case SingleLanInternal:
                 break;
         }
+         */
 
         return v;
     }

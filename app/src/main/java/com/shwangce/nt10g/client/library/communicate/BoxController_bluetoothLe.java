@@ -34,7 +34,7 @@ public class BoxController_bluetoothLe implements IBoxController {
             Log.d("onFindNewDevice", device.getAddress() + " => " + device.getName());
             if(device != null && device.getName()!= null) {
                 String devicename = device.getName();
-                if (devicename.indexOf("NT201")>=0) {
+                if (devicename.indexOf("NT10G")>=0) {
                     deviceMap.put(devicename, device);
                     if (listener != null) {
                         listener.onFindNewDevice(new DeviceBean(device.getName(),device.getAddress()));

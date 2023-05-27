@@ -83,7 +83,7 @@ public class DeviceSelectDialogFragment extends BaseDialogFragment implements De
     private final int MESSAGE_DEVICE_ENTERERROR = 10;
 
     private final int MESSAGE_SELF_START_SCAN = 11;
-    private final int MESSAGE_DEVICE_NT201L_IS_FOUND = 12;
+    private final int MESSAGE_DEVICE_NT10G_IS_FOUND = 12;
 
     private final Handler handler = new Handler() {
         @Override
@@ -159,7 +159,7 @@ public class DeviceSelectDialogFragment extends BaseDialogFragment implements De
                 case MESSAGE_DEVICE_ENTERERROR:
                     if(sweetAlertDialog!=null && sweetAlertDialog.isShowing())
                         sweetAlertDialog.dismiss();
-                    showErrorDialog("设备名称必须以NT201L_开头，或者 MAC地址格式错误（以:分隔）!");
+                    showErrorDialog("设备名称必须以NT10G_开头，或者 MAC地址格式错误（以:分隔）!");
                 case MESSAGE_SELF_START_SCAN:
                     btn_scanBle.performClick();
 

@@ -449,7 +449,7 @@ public class BluetoothLeHelper {
             for (String address : addressList) {
                 String m = address.toUpperCase();
                 String l = m.substring(9);
-                DeviceBean deviceBean = new DeviceBean("NT201L_" + l, m);
+                DeviceBean deviceBean = new DeviceBean("NT10G_" + l, m);
                 BluetoothDevice device = mAdapter.getRemoteDevice(m);
                 BluetoothGatt gatt = device.connectGatt(context, false, gattCallback);
                 ConnetDeviceObject connetDeviceObject = new ConnetDeviceObject(deviceBean,gatt,timerOutCallBack);
@@ -478,7 +478,7 @@ public class BluetoothLeHelper {
             for (String mac:deviceAddress) {
                 String m = mac.toUpperCase();
                 String l = m.substring(9);
-                DeviceBean deviceBean = new DeviceBean("NT201L_" + l,m);
+                DeviceBean deviceBean = new DeviceBean("NT10G_" + l,m);
                 BluetoothDevice device = mAdapter.getRemoteDevice(m);
                 tryConnectDeviceList.add(deviceBean);
                 device.connectGatt(context, false, mGattCallback); //该函数才是真正的去进行连接

@@ -18,8 +18,8 @@ public class DatabaseUtil {
 
     private final Context context;
     private SQLiteDatabase database;
-    private static final String DATABASE_NAME = "/mnt/sdcard/Shwangce/nt201";
-    private static final String TABLE_NAME = "nt201";
+    private static final String DATABASE_NAME = "/mnt/sdcard/Shwangce/nt10g";
+    private static final String TABLE_NAME = "nt10g";
     private static final String COLUMNNAME_HXBOX_USERNAME = "username";
     private static final String COLUMNNAME_HXBOX_PASSWORD = "password";
     private static final String COLUMNNAME_HXBOX_USERID = "userid";

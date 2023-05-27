@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:textColor="#ff336699"
             android:textSize="18sp"
-            android:text="此功能用于上传日志文件至手机内存中，手机存储目录：文件管理 -> 本地 -> 内部存储 -> Shwangce，日志文件名：NT201L_xx:xx:xx_log.txt。"/>
+            android:text="此功能用于上传日志文件至手机内存中，手机存储目录：文件管理 -> 本地 -> 内部存储 -> Shwangce，日志文件名：NT10G_xx:xx:xx_log.txt。"/>
 
 
     </LinearLayout>

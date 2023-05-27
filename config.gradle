@@ -5,7 +5,7 @@ ext {
         applicationId: 'com.shwangce.nt10g.client',
         compileSdkVersion: 28,
         buildToolsVersion: "30.0.3",
-        minSdkVersion    : 28,
+        minSdkVersion    : 26,
         versionCode      : 23052201,
         versionName      : "0.0.1.01",
         flavorDimensions : "CHANNEL"

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <!-- 引入 ECharts 文件 -->
+    <script src="echarts.min.js"></script>
+    <style type="text/css">
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+            }
+
+            * {
+                margin: 0;
+            }
+			
+			.label_title {
+				text-align: center;
+				font-size: 20px;
+			}
+			.label_detail {
+				
+				text-align: center;
+				font-size: 20px;
+
+			}
+<!--		
+            .chart_gauge {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: .24rem;
+                color: #999;
+            }
+			
+			.chart_line {
+			    display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: .24rem;
+                color: #999;
+			}
+-->
+    </style>
+</head>
+<body>
+
+<div style="height:5%;">
+	<button type="button" onclick="addDataTest(1)">添加下载数据</button>
+	<button type="button" onclick="addDataTest(2)">添加上传数据</button>
+	<button type="button" onclick="showSpeedResultTest(1)">显示下载结论</button>
+	<button type="button" onclick="showSpeedResultTest(2)">显示上传结论</button>
+	<button type="button" onclick="clearData()">清空数据</button>
+</div>
+<div class="chart_gauge" id="chart_speed_gauge" style="height:65%;"></div>
+<div style="height:15%;">
+	<div style="float:left">
+		<div>
+			<label class="label_title">下载/Mbps</label>
+		</div>
+		<div>
+			<label class="label_detail" id="label_download_avg"></label>
+		</div>
+	</div>
+	<div style="float:right;width:80%;height:100%"class="chart_line" id="chart_download_line"></div>
+</div>
+<div style="height:15%;">
+	<div style="float:left">
+		<div>
+			<label class="label_title">上传/Mbps</label>
+		</div>
+		<div>
+			<label class="label_detail" id="label_upload_avg"></label>
+		</div>
+	</div>
+    <div style="float:right;width:80%;height:100%" class="chart_line" id="chart_upload_line"></div>
+</div>
+<script type="text/javascript">
+    let downloadList = [];
+	let uploadList = [];
+    function addSpeedData(du,data) {
+		if(du == 1)	{		//download
+			downloadList.push(data)
+			speedChart.setOption({
+				series: [
+					{ data: [{value: data}]}
+					]
+				});
+			downloadChart.setOption({
+				series: [
+					{ data: downloadList }
+				]});
+			console.log("addDownloadData '" + data + "' Complete");
+		} else if(du == 2)	{	//upload
+			uploadList.push(data)
+			speedChart.setOption({
+				series: [
+					{ data: [{value: data}]}
+					]
+				});
+			uploadChart.setOption({
+				series: [
+					{ data: uploadList }
+				]});
+			console.log("addUpoadData '" + data + "' Complete");
+		}			
+    }
+	function showSpeedResult(du,speed) {
+		if(du == 1)	{		//download
+			downloadAvgLabel.innerText = speed;
+			console.log("showDownloadResult '" + speed + "'");
+		} else if(du == 2) {	//upload
+			uploadAvgLabel.innerText = speed;
+			console.log("showUploadResult '" + speed + "'");
+		}
+		
+    }
+	
+	function clearData() {
+		downloadList=[]
+        uploadList=[]
+        speedChart.setOption({
+			series: [
+				{ data: [{value: 0}]}
+				]
+			});
+		downloadChart.setOption({
+			series: [
+				{ data: downloadList }
+			]});
+		uploadChart.setOption({
+			series: [
+				{ data: uploadList }
+			]});
+		downloadAvgLabel.innerText = "--";
+		uploadAvgLabel.innerText= "--";
+		console.log("clearData Complete");
+    }
+
+	function addDataTest(du) {
+		const random = +(Math.random() * 1024).toFixed(2);
+		addSpeedData(du,random);
+	}
+
+	function showSpeedResultTest(du) {
+		const random = +(Math.random() * 1024).toFixed(2);
+		showSpeedResult(du,random);
+	}	
+    
+	function setOption(option) {
+        console.log("设置图表chart：\n" + JSON.stringify(option));
+        // 基于准备好的dom，初始化echarts实例
+        try {
+            var myChart = echarts.init(document.getElementById('chart_speed_gauge'));
+            myChart.setOption(option);
+        } catch (e) {
+            console.log("设置图表error：\n" + e);
+        }
+    }
+</script>
+<script type="text/javascript">
+/*
+    (function(doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function() {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                window.mtSizeBase = 100 * (clientWidth / 750);
+                window.mtSizeBase = window.mtSizeBase > 100 ? 100 : window.mtSizeBase;
+                window.mtSizeBase = window.mtSizeBase < 45 ? 45 : window.mtSizeBase;
+                docEl.style.fontSize = window.mtSizeBase + 'px';
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+	*/
+	var speedChart = echarts.init(document.getElementById('chart_speed_gauge'));
+	var downloadChart = echarts.init(document.getElementById('chart_download_line'));
+	var uploadChart = echarts.init(document.getElementById('chart_upload_line'));
+	var downloadAvgLabel = document.getElementById('label_download_avg');
+	var uploadAvgLabel = document.getElementById('label_upload_avg');
+	var option_speed = {
+        series:[
+            {
+                type: 'gauge',
+                min: 0,
+                max: 1024,
+                axisLine: {lineStyle: {width: 30,color: [[0.3, '#67e0e3'],[0.7, '#37a2da'],[1, '#fd666d']]}},
+                pointer: {itemStyle: {color: 'inherit'}},
+                axisTick: {distance: -30,length: 8,lineStyle: {color: '#fff',width: 2}},
+                splitLine: {distance: -30,length: 30,lineStyle: {color: '#fff',width: 4}},
+                axisLabel: {color: 'inherit',distance: 40,fontSize: 10},
+                detail: {valueAnimation: true,formatter: '{value} Mbps',color: 'inherit'},
+				data: [{value: 0}]
+            }
+        ]
+	};
+	var option_download = {
+		xAxis: {
+			type: 'category',
+//			show: false
+		},
+		yAxis: {
+			type: 'value',
+//			show: false
+		},
+        series:[
+			{
+                type: 'line',
+                smooth: true,
+				symbol: 'none',
+                seriesLayoutBy: 'row'
+             }
+        ]
+	};
+	var option_upload = {
+		xAxis: {
+			type: 'category',
+//			show: false
+		},
+		yAxis: {
+			type: 'value',
+//			show: false
+		},
+		series:[
+			{
+                type: 'line',
+                smooth: true,
+				symbol: 'none',
+                seriesLayoutBy: 'row'
+             }
+        ]
+	};
+	
+/*	
+    var option2 = {
+        xAxis: {type: 'category'},
+        yAxis: {type: 'value'},
+        grid: { top: '80%' },
+        series:[
+            {
+                type: 'line',
+                smooth: true,
+                seriesLayoutBy: 'row'
+             },
+            {
+                type: 'gauge',
+                min: 0,
+                max: 1024,
+                radius: '80%',
+                center: ['50%', '50%'],
+                axisLine: {lineStyle: {width: 30,color: [[0.3, '#67e0e3'],[0.7, '#37a2da'],[1, '#fd666d']]}},
+                pointer: {itemStyle: {color: 'inherit'}},
+                axisTick: {distance: -30,length: 8,lineStyle: {color: '#fff',width: 2}},
+                splitLine: {distance: -30,length: 30,lineStyle: {color: '#fff',width: 4}},
+                axisLabel: {color: 'inherit',distance: 40,fontSize: 10},
+                detail: {valueAnimation: true,formatter: '{value} Mbps',color: 'inherit'}
+            }
+        ]
+	};
+	 */
+
+    speedChart.setOption(option_speed);
+	downloadChart.setOption(option_download);
+	uploadChart.setOption(option_upload);
+	//clearData();
+
+
+</script>
+</body>
+</html>

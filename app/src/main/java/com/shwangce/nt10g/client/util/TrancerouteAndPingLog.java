@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 public abstract class TrancerouteAndPingLog {
 
     //private Context context;
-    //private static final String FILENAME = Utils.SDCardDir +  "/nt201log.txt";
+    //private static final String FILENAME = Utils.SDCardDir +  "/nt10glog.txt";
     //Map TimerSchedule = SharedPreferencesUtil.getTimerSchedule( context);
     //String ddd = TimerSchedule.get("storage").toString();
 

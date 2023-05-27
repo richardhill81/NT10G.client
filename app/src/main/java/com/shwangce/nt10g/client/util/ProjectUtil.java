@@ -112,7 +112,7 @@ public class ProjectUtil {
     public static String ConnectedDeviceName = "";
 
 
-    public static ShowSpeedType showSpeedType = ShowSpeedType.TEXT;
+    public static ShowSpeedType showSpeedType = ShowSpeedType.CHART;
 
     public static SpeedTestKind speedTestKind = SpeedTestKind.Unknown;
     public static String Httpdownloadurl = "";

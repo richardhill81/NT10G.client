@@ -57,7 +57,7 @@ public class WorkUtils {
         if (deviceName == null || deviceName.equals("")) {
             return false;
         }
-        String deviceNameRule = "NT201L_([A-Fa-f0-9]{2}[:]){2}[A-Fa-f0-9]{2}";
+        String deviceNameRule = "NT10G_([A-Fa-f0-9]{2}[:]){2}[A-Fa-f0-9]{2}";
         if (deviceName.matches(deviceNameRule)) {
             return true;
         } else {
