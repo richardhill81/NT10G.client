@@ -577,7 +577,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     @Override
     public void showConnected(String devicename) {
-        devicename = devicename.replace("NT10G_","");
+        devicename = devicename.replace(ProjectUtil.DeviceName + "_","");
         connectedDeviceName = devicename;
         mainHandler.sendMessage(mainHandler.obtainMessage(ProjectUtil.MESSAGE_CONNECTED, devicename));
     }

@@ -1,6 +1,8 @@
 package com.shwangce.nt10g.client.library;
 
 
+import com.shwangce.nt10g.client.util.ProjectUtil;
+
 /**
  * Created by Administrator on 2016/9/29 0029.
  */
@@ -57,7 +59,7 @@ public class WorkUtils {
         if (deviceName == null || deviceName.equals("")) {
             return false;
         }
-        String deviceNameRule = "NT10G_([A-Fa-f0-9]{2}[:]){2}[A-Fa-f0-9]{2}";
+        String deviceNameRule = ProjectUtil.DeviceName + "_([A-Fa-f0-9]{2}[:]){2}[A-Fa-f0-9]{2}";
         if (deviceName.matches(deviceNameRule)) {
             return true;
         } else {

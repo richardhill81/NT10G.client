@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 
 import com.shwangce.nt10g.client.library.WorkUtils;
 import com.shwangce.nt10g.client.util.Log;
+import com.shwangce.nt10g.client.util.ProjectUtil;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -449,7 +450,7 @@ public class BluetoothLeHelper {
             for (String address : addressList) {
                 String m = address.toUpperCase();
                 String l = m.substring(9);
-                DeviceBean deviceBean = new DeviceBean("NT10G_" + l, m);
+                DeviceBean deviceBean = new DeviceBean(ProjectUtil.DeviceName + "_" + l, m);
                 BluetoothDevice device = mAdapter.getRemoteDevice(m);
                 BluetoothGatt gatt = device.connectGatt(context, false, gattCallback);
                 ConnetDeviceObject connetDeviceObject = new ConnetDeviceObject(deviceBean,gatt,timerOutCallBack);

@@ -3,6 +3,7 @@ package com.shwangce.nt10g.client.util;
 import android.content.pm.PackageInfo;
 import android.os.Environment;
 
+import com.shwangce.nt10g.client.R;
 import com.shwangce.nt10g.client.bean.BoxInfoBean;
 import com.shwangce.nt10g.client.library.FtpServerBean;
 import com.shwangce.nt10g.client.library.communicate.BoxController;
@@ -24,7 +25,7 @@ public class ProjectUtil {
 
     public static final int K = 1024;
     public static final int M = K * K;
-
+    public static final String DeviceName = String.valueOf(R.string.device_name);
     public static final String SDCardDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Shwangce";
 
     public static int APIVERSION = android.os.Build.VERSION.SDK_INT;

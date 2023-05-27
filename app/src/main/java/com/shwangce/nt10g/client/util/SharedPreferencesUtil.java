@@ -228,7 +228,7 @@ public abstract class SharedPreferencesUtil {
                     String d = deviceStrings[i];
                     int l = d.indexOf("&");
                     if(l >=0) {
-                        deviceBeans.add(new DeviceBean(d.substring(0,l).replace("NT10G_",""),d.substring(l+1)));
+                        deviceBeans.add(new DeviceBean(d.substring(0,l).replace(ProjectUtil.DeviceName + "_",""),d.substring(l+1)));
                         //deviceBeans.add(new DeviceBean(d.substring(0,l),d.substring(l+1)));
                     }
                 }

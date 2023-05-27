@@ -9,6 +9,7 @@ import com.shwangce.nt10g.client.library.ControlFrame.FrameHelper;
 import com.shwangce.nt10g.client.library.bluetoothLe.BluetoothLeHelper;
 import com.shwangce.nt10g.client.library.bluetoothLe.DeviceBean;
 import com.shwangce.nt10g.client.util.Log;
+import com.shwangce.nt10g.client.util.ProjectUtil;
 
 import java.util.HashMap;
 
@@ -34,7 +35,7 @@ public class BoxController_bluetoothLe implements IBoxController {
             Log.d("onFindNewDevice", device.getAddress() + " => " + device.getName());
             if(device != null && device.getName()!= null) {
                 String devicename = device.getName();
-                if (devicename.indexOf("NT10G")>=0) {
+                if (devicename.indexOf(ProjectUtil.DeviceName)>=0) {
                     deviceMap.put(devicename, device);
                     if (listener != null) {
                         listener.onFindNewDevice(new DeviceBean(device.getName(),device.getAddress()));

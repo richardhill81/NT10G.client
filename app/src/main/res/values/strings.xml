@@ -1,6 +1,7 @@
 <resources>
     <!--<string name="app_name">网络助手</string> -->
     <string name="title_clientversion">客户端版本：</string>
+    <string name="device_name">NT201</string>
     <string name="title_devicename">连接设备：</string>
     <string name="title_testmode">测试模式：</string>
     <string name="title_accesstype">地址获取：</string>
