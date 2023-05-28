@@ -40,8 +40,6 @@ import com.shwangce.nt10g.client.R;
 import com.shwangce.nt10g.client.databinding.ActivityMainBinding;
 import com.shwangce.nt10g.client.deviceselect.DeviceSelectDialogFragment;
 import com.shwangce.nt10g.client.deviceselect.DeviceSelectPresenter;
-import com.shwangce.nt10g.client.iptvtest.IptvTestFragment;
-import com.shwangce.nt10g.client.iptvtest.IptvTestPresenter;
 import com.shwangce.nt10g.client.library.AppUpdate.UpdateBean;
 import com.shwangce.nt10g.client.library.AppUpdate.UpdateWork;
 import com.shwangce.nt10g.client.library.communicate.BoxController;
@@ -55,15 +53,12 @@ import com.shwangce.nt10g.client.setaccess.SetAccessPresenter;
 import com.shwangce.nt10g.client.setting.SettingFragment;
 import com.shwangce.nt10g.client.setting.SettingPresenter;
 import com.shwangce.nt10g.client.speedtest.SpeedTestFragment;
-import com.shwangce.nt10g.client.speedtest.SpeedTestKind;
 import com.shwangce.nt10g.client.speedtest.SpeedTestPresenter;
 import com.shwangce.nt10g.client.sweetalert.SweetAlertDialog;
 import com.shwangce.nt10g.client.util.Log;
 import com.shwangce.nt10g.client.util.ProjectUtil;
 import com.shwangce.nt10g.client.util.SharedPreferencesUtil;
-import com.shwangce.nt10g.client.wifitest.WifiBean;
-import com.shwangce.nt10g.client.wifitest.WifiTestFragment;
-import com.shwangce.nt10g.client.wifitest.WifiTestPresenter;
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -72,7 +67,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements IMainView {
 
-    private static final String TAG = "NT-201.MainActivity";
+    private static final String TAG = "NT10G.MainActivity";
 
     private Context context;
     private ActivityMainBinding binding;
@@ -86,8 +81,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     private SpeedTestFragment speedTestFragment;
     private SettingFragment settingFragment;
     private NetToolsFragment netToolsFragment;
-    private IptvTestFragment iptvTestFragment;
-    private WifiTestFragment wifiTestFragment;
+    //private WifiTestFragment wifiTestFragment;
     private SweetAlertDialog sweetAlertDialog;
     private MainPresenter mainPresenter;
 
@@ -183,17 +177,23 @@ public class MainActivity extends AppCompatActivity implements IMainView {
                         case WifiDHCP:
                             llyt_wifi_info.setVisibility(View.VISIBLE);
                             tv_testmode.setText(R.string.wifiDHCP);
+                            /*
                             wifiTestFragment = new WifiTestFragment();
                             wifiTestFragment.show(getFragmentManager(), "WifiTestFragment");
                             new WifiTestPresenter(wifiTestFragment, mainPresenter).start();
+
+                             */
                             break;
                         case LanAndWifi:
                             llyt_wifi_info.setVisibility(View.VISIBLE);
                             tv_testmode.setText(R.string.lanAndWifi);
+                            /*
                             wifiTestFragment = new WifiTestFragment();
                             wifiTestFragment.show(getFragmentManager(), "WifiTestFragment");
 
                             new WifiTestPresenter(wifiTestFragment, mainPresenter).start();
+
+                             */
                             break;
                         /*
                         case ITVSimulate:
@@ -247,12 +247,16 @@ public class MainActivity extends AppCompatActivity implements IMainView {
                     break;
 
                 case ProjectUtil.MESSAGE_ACCESS_WIFI_DHCP:
+                    /*
                     tv_accesstype.setText("Wi-Fi");
                     tv_accesschange.setVisibility(View.VISIBLE);
                     tabTestspeed.callOnClick();
+
+                     */
                     break;
 
                 case ProjectUtil.MESSAGE_UPDATE_AP_INFO:
+                    /*
                     WifiBean wifiBean;
                     if(msg.obj == null)
                         wifiBean = new WifiBean();
@@ -271,6 +275,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
                         tv_wifi_txbandwidth.setText(wifiBean.get_txBandWidth() + "Mbps");
                     else
                         tv_wifi_txbandwidth.setText("/");
+
+                     */
                     break;
 
 
@@ -404,6 +410,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        ProjectUtil.DeviceName = getString(R.string.device_name);
         tabTestspeed = binding.tabMenuTestspeed;
         tabSetting = binding.tabMenuSetting;
         tabNetTools = binding.tabMenuNettoolstest;
@@ -541,23 +548,6 @@ public class MainActivity extends AppCompatActivity implements IMainView {
                     new NetToolsPresenter(netToolsFragment, mainPresenter).start();
                 } else {
                     transaction.show(netToolsFragment);
-                }
-                break;
-
-            case IptvTest:
-                if(ProjectUtil.isBoxSe()) {
-                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("SE版本暂不支持iTV测试！")
-                            .show();
-                    return;
-                }
-                tabIptvTest.setSelected(true);
-                if (iptvTestFragment == null) {
-                    iptvTestFragment = new IptvTestFragment();
-                    transaction.add(R.id.fragment_container, iptvTestFragment);
-                    new IptvTestPresenter(iptvTestFragment, mainPresenter).start();
-                } else {
-                    transaction.show(iptvTestFragment);
                 }
                 break;
         }
@@ -718,7 +708,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     public void doShowBoxUpdateFailAlertDialog(String contentText) {
         mainHandler.sendMessage(mainHandler.obtainMessage(ProjectUtil.MESSAGE_BOXUPDATE_FAIL, contentText));
     }
-
+/*
     @Override
     public void doShowAPInfo(WifiBean bean) {
         mainHandler.sendMessage(mainHandler.obtainMessage(ProjectUtil.MESSAGE_UPDATE_AP_INFO, bean));
@@ -728,6 +718,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     public void doAPConnected(WifiBean bean) {
         mainHandler.sendMessage(mainHandler.obtainMessage(ProjectUtil.MESSAGE_CONNECTAP_SUCCESS, bean));
     }
+
+ */
 
     private void doShowUpdateDialog(String update_describe) {
         new AlertDialog.Builder(context)
@@ -826,7 +818,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         //ProjectUtil.ftpServerBean = SharedPreferencesUtil.getFtpDownloadServerBean(context);
         ProjectUtil.hxBoxBean = SharedPreferencesUtil.getHxUserInfo(context);
         ProjectUtil.boxInfoBean = SharedPreferencesUtil.getBoxInfo(context);
-        ProjectUtil.historyApArray = SharedPreferencesUtil.getApHistory(context);
+        //ProjectUtil.historyApArray = SharedPreferencesUtil.getApHistory(context);
         if (ProjectUtil.Httpdownloadurl.isEmpty()) {
             ProjectUtil.Httpdownloadurl = getString(R.string.default_download_url);
         }
@@ -1006,9 +998,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     private void startWork() {
         mainPresenter = new MainPresenter(context, this);
         mainPresenter.start();
-        doSelfStartScan();
-        showDeviceSelectDialog();
-        //showModeSelectDialog();
+        //doSelfStartScan();
+        //showDeviceSelectDialog();
     }
 
     /**
@@ -1099,8 +1090,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
             transaction.hide(settingFragment);
         if (netToolsFragment != null)
             transaction.hide(netToolsFragment);
-        if (iptvTestFragment != null)
-            transaction.hide(iptvTestFragment);
+        //if (iptvTestFragment != null)
+        //    transaction.hide(iptvTestFragment);
     }
 
     //重置所有文本的选中状态

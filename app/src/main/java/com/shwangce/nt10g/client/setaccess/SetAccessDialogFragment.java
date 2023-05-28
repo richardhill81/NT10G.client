@@ -16,11 +16,7 @@ import android.widget.LinearLayout;
 import com.shwangce.nt10g.client.BaseDialogFragment;
 import com.shwangce.nt10g.client.R;
 import com.shwangce.nt10g.client.sweetalert.SweetAlertDialog;
-import com.shwangce.nt10g.client.util.ProjectUtil;
 import com.shwangce.nt10g.client.util.SharedPreferencesUtil;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by Administrator on 2016/12/7 0007.

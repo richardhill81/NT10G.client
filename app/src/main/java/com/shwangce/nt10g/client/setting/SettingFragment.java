@@ -27,7 +27,9 @@ import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 
 import com.shwangce.nt10g.client.R;
+import com.shwangce.nt10g.client.databinding.FragmentSettingBinding;
 import com.shwangce.nt10g.client.speedtest.HxBoxBean;
+import com.shwangce.nt10g.client.speedtest.SpeedTestFragment;
 import com.shwangce.nt10g.client.speedtest.SpeedTestKind;
 import com.shwangce.nt10g.client.sweetalert.SweetAlertDialog;
 import com.shwangce.nt10g.client.util.Log;
@@ -37,13 +39,6 @@ import com.shwangce.nt10g.client.util.SharedPreferencesUtil;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
-//import static com.shwangce.nt10g.client.util.client.ProjectUtil.ftpServerBean;
-
 /**
  * Created by Administrator on 2017/2/8 0008.
  */
@@ -99,111 +94,26 @@ public class SettingFragment extends Fragment implements SettingContract.View {
 
     private boolean isStopExportLogFile = false;    //是否停止发送请求日志文件数据的标志
 
-
-    @BindView(R.id.settings_listview)
-    ListView lv_settingItem;
-    @BindView(R.id.setting_llyt_speedtest)
-    LinearLayout llyt_speedtest;
-    //add by hzj in 2018.12.13
-    @BindView(R.id.setting_llyt_filemanager)
-    LinearLayout llyt_filemanager;
-
-    //add by hzj in 2018.12.13 新增日志导出
-    @BindView(R.id.setting_llyt_logexport)
-    LinearLayout llyt_logexport;
-
-    @BindView(R.id.setting_llyt_hxinfo)
-    LinearLayout llyt_hxinfo;
-    @BindView(R.id.setting_llyt_boxinfo)
-    LinearLayout llyt_boxinfo;
-
-    @BindView(R.id.testsource_button_submit)
-    Button testsource_button_submit;
-    @BindView(R.id.testsource_button_back)
-    Button testsource_button_back;
-    @BindView(R.id.testsource_radiogroup1)
-    RadioGroup testsource_radiogroup1;
-    @BindView(R.id.testsource_radiogroup2)
-    RadioGroup testsource_radiogroup2;
-    @BindView(R.id.testsource_radiogroup3)
-    RadioGroup testsource_radiogroup3;
-    @BindView(R.id.testsource_radiogroup4)
-    RadioGroup testsource_radiogroup4;
-    @BindView(R.id.testsource_radio_gd10000)
-    RadioButton radio_gd10000;
-    @BindView(R.id.testsource_radio_hunandx)
-    RadioButton radio_hunan10000;
-    @BindView(R.id.testsource_radio_http)
-    RadioButton radio_http;
-    @BindView(R.id.testsource_radio_hxbox)
-    RadioButton radio_hxbox;
-    @BindView(R.id.testsource_radio_speedtest)
-    RadioButton radio_speedtest;
-    @BindView(R.id.testsource_radio_ftp)
-    RadioButton radio_ftpdownload;
-    @BindView(R.id.testsource_radio_jiangsu)
-    RadioButton radio_jiangsu;
-    @BindView(R.id.testsource_edittext_httpdownloadUrl)
-    EditText httpdownloadurlEditText;
-    @BindView(R.id.testsource_edittext_httpuploadUrl)
-    EditText httpuploadurlEditText;
-    @BindView(R.id.testsource_http_layout)
-    LinearLayout httpLinearLayout;
-    @BindView(R.id.testsource_ftp_layout)
-    LinearLayout ftpLinearLayout;
-    @BindView(R.id.testsource_edittext_ftpUrl)
-    EditText ftpurlEditText;
-    @BindView(R.id.testsource_edittext_ftpUserName)
-    EditText ftpUserNameEditText;
-    @BindView(R.id.testsource_edittext_ftpPassword)
-    EditText ftpPasswordEditText;
-
-    @BindView(R.id.boxinfo_textview_clientversion)
-    TextView boxinfo_textview_clientversion;
-    @BindView(R.id.boxinfo_textview_boxversion)
-    TextView boxinfo_textview_boxversion;
-    @BindView(R.id.boxinfo_checkbox_boxworkmode)
-    CheckBox boxinfo_checkbox_boxworkmode;
-    @BindView(R.id.boxinfo_radiogroup_tcpdumpsave)
-    RadioGroup boxinfo_radiogroup_tcpdumpsave;
-    @BindView(R.id.boxinfo_radiobutton_tcpdumpsaveatsdcard0)
-    RadioButton boxinfo_radiobutton_tcpdumpsaveatsdcard0;
-    @BindView(R.id.boxinfo_radiobutton_tcpdumpsaveatsdcard1)
-    RadioButton boxinfo_radiobutton_tcpdumpsaveatsdcard1;
-    @BindView(R.id.boxinfo_button_submit)
-    Button boxinfo_button_submit;
-    @BindView(R.id.boxinfo_button_back)
-    Button boxinfo_button_back;
-
-    @BindView(R.id.hxinfo_edittext_username)
-    EditText hxinfo_edittext_username;
-    @BindView(R.id.hxinfo_edittext_userid)
-    EditText hxinfo_edittext_userid;
-    @BindView(R.id.hxinfo_edittext_userpwd)
-    EditText hxinfo_edittext_userpwd;
-    @BindView(R.id.hxinfo_edittext_worksheetnum)
-    EditText hxinfo_edittext_worksheetnum;
-    @BindView(R.id.hxinfo_button_submit)
-    Button hxinfo_button_submit;
-    @BindView(R.id.hxinfo_button_back)
-    Button hxinfo_button_back;
-
-    @BindView(R.id.fileManager_bt_back)
-    Button fileManager_bt_back;
-    @BindView(R.id.fileManager_bt_delete)
-    Button fileManager_bt_delete;
-    @BindView(R.id.fileManager_expandableListView_showFile)
-    ExpandableListView fileManager_expandableListView_showFile;
-    @BindView(R.id.fileManager_textView_showSpace)
-    TextView fileManager_textView_showSpace;
-
-    // add by hzj on 20191014
-    @BindView(R.id.logExport_bt_export)
-    Button logExport_bt_export;
-    @BindView(R.id.logExport_bt_back)
-    Button getLogExport_bt_back;
-
-
+    //private FragmentSettingBinding binding;
+    private ListView lv_settingItem;
+    private LinearLayout llyt_speedtest,llyt_filemanager,llyt_logexport,llyt_hxinfo,llyt_boxinfo,
+            httpLinearLayout,ftpLinearLayout;
+    private Button testsource_button_submit,testsource_button_back,
+            boxinfo_button_submit,boxinfo_button_back,
+            hxinfo_button_submit,hxinfo_button_back,
+            fileManager_bt_back,fileManager_bt_delete,
+            logExport_bt_export,logExport_bt_back;
+    private RadioGroup testsource_radiogroup1,testsource_radiogroup2,testsource_radiogroup3,
+            testsource_radiogroup4,boxinfo_radiogroup_tcpdumpsave;
+    private EditText httpdownloadurlEditText,httpuploadurlEditText,
+            ftpurlEditText,ftpUserNameEditText,ftpPasswordEditText,
+            hxinfo_edittext_username,hxinfo_edittext_userid,hxinfo_edittext_userpwd,hxinfo_edittext_worksheetnum;
+    private TextView boxinfo_textview_clientversion,boxinfo_textview_boxversion,fileManager_textView_showSpace;
+    private CheckBox boxinfo_checkbox_boxworkmode;
+    private RadioButton radio_gd10000,radio_hunan10000,radio_http,radio_hxbox,radio_speedtest,
+            radio_ftpdownload,radio_jiangsu,
+            boxinfo_radiobutton_tcpdumpsaveatsdcard0,boxinfo_radiobutton_tcpdumpsaveatsdcard1;
+    private ExpandableListView fileManager_expandableListView_showFile;
     private Context context;
     private SpeedTestKind selectTestType = ProjectUtil.speedTestKind;
     private SettingListAdapter listAdapter;
@@ -663,7 +573,118 @@ public class SettingFragment extends Fragment implements SettingContract.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
-        ButterKnife.bind(this, view);
+        /*
+        binding = FragmentSettingBinding.inflate(inflater,container,false);
+        lv_settingItem = binding.settingsListview;
+        llyt_speedtest = binding.settingLlytSpeedtest;
+        llyt_hxinfo = binding.settingLlytHxinfo;
+        llyt_boxinfo = binding.settingLlytBoxinfo;
+        //add by hzj in 2018.12.13 新增日志导出
+        llyt_filemanager = binding.settingLlytFilemanager;
+        llyt_logexport = binding.settingLlytLogexport;
+        //测速设置
+        testsource_button_submit = binding.includeSettingSpeedtest.testsourceButtonSubmit;
+        testsource_button_back = binding.includeSettingSpeedtest.testsourceButtonBack;
+        testsource_radiogroup1 = binding.includeSettingSpeedtest.testsourceRadiogroup1;
+        testsource_radiogroup2 = binding.includeSettingSpeedtest.testsourceRadiogroup2;
+        testsource_radiogroup3 = binding.includeSettingSpeedtest.testsourceRadiogroup3;
+        testsource_radiogroup4 = binding.includeSettingSpeedtest.testsourceRadiogroup4;
+        radio_gd10000 = binding.includeSettingSpeedtest.testsourceRadioGd10000;
+        radio_hunan10000 = binding.includeSettingSpeedtest.testsourceRadioHunandx;
+        radio_http = binding.includeSettingSpeedtest.testsourceRadioHttp;
+        radio_hxbox = binding.includeSettingSpeedtest.testsourceRadioHxbox;
+        radio_speedtest = binding.includeSettingSpeedtest.testsourceRadioSpeedtest;
+        radio_ftpdownload = binding.includeSettingSpeedtest.testsourceRadioFtp;
+        radio_jiangsu = binding.includeSettingSpeedtest.testsourceRadioJiangsu;
+        httpdownloadurlEditText = binding.includeSettingSpeedtest.testsourceEdittextHttpdownloadUrl;
+        httpuploadurlEditText = binding.includeSettingSpeedtest.testsourceEdittextHttpuploadUrl;
+        httpLinearLayout = binding.includeSettingSpeedtest.testsourceHttpLayout;
+        ftpLinearLayout = binding.includeSettingSpeedtest.testsourceFtpLayout;
+        ftpurlEditText = binding.includeSettingSpeedtest.testsourceEdittextFtpUrl;
+        ftpUserNameEditText = binding.includeSettingSpeedtest.testsourceEdittextFtpUserName;
+        ftpPasswordEditText = binding.includeSettingSpeedtest.testsourceEdittextFtpPassword;
+        //HX测速设置
+        hxinfo_edittext_username = binding.includeSettingHxinfo.hxinfoEdittextUsername;
+        hxinfo_edittext_userid = binding.includeSettingHxinfo.hxinfoEdittextUserid;
+        hxinfo_edittext_userpwd = binding.includeSettingHxinfo.hxinfoEdittextUserpwd;
+        hxinfo_edittext_worksheetnum = binding.includeSettingHxinfo.hxinfoEdittextWorksheetnum;
+        hxinfo_button_submit = binding.includeSettingHxinfo.hxinfoButtonSubmit;
+        hxinfo_button_back = binding.includeSettingHxinfo.hxinfoButtonBack;
+        //盒子信息
+        boxinfo_textview_clientversion = binding.includeSettingBoxinfo.boxinfoTextviewClientversion;
+        boxinfo_textview_boxversion = binding.includeSettingBoxinfo.boxinfoTextviewBoxversion;
+        boxinfo_checkbox_boxworkmode = binding.includeSettingBoxinfo.boxinfoCheckboxBoxworkmode;
+        boxinfo_radiogroup_tcpdumpsave = binding.includeSettingBoxinfo.boxinfoRadiogroupTcpdumpsave;
+        boxinfo_radiobutton_tcpdumpsaveatsdcard0 = binding.includeSettingBoxinfo.boxinfoRadiobuttonTcpdumpsaveatsdcard0;
+        boxinfo_radiobutton_tcpdumpsaveatsdcard1 = binding.includeSettingBoxinfo.boxinfoRadiobuttonTcpdumpsaveatsdcard1;
+        boxinfo_button_submit = binding.includeSettingBoxinfo.boxinfoButtonSubmit;
+        boxinfo_button_back = binding.includeSettingBoxinfo.boxinfoButtonBack;
+        //文件设置
+        fileManager_bt_back = binding.includeSettingFilemanager.fileManagerBtBack;
+        fileManager_bt_delete = binding.includeSettingFilemanager.fileManagerBtDelete;
+        fileManager_expandableListView_showFile = binding.includeSettingFilemanager.fileManagerExpandableListViewShowFile;
+        fileManager_textView_showSpace = binding.includeSettingFilemanager.fileManagerTextViewShowSpace;
+        //文件导出
+        // add by hzj on 20191014
+        logExport_bt_export = binding.includeSettingLogexport.logExportBtExport;
+        logExport_bt_back = binding.includeSettingLogexport.logExportBtBack;
+         */
+        lv_settingItem = view.findViewById(R.id.settings_listview);
+        llyt_speedtest = view.findViewById(R.id.setting_llyt_speedtest);
+        llyt_hxinfo = view.findViewById(R.id.setting_llyt_hxinfo);
+        llyt_boxinfo = view.findViewById(R.id.setting_llyt_boxinfo);
+        //add by hzj in 2018.12.13 新增日志导出
+        llyt_filemanager = view.findViewById(R.id.setting_llyt_filemanager);
+        llyt_logexport = view.findViewById(R.id.setting_llyt_logexport);
+        //测速设置
+        testsource_button_submit = view.findViewById(R.id.testsource_button_submit);
+        testsource_button_back = view.findViewById(R.id.testsource_button_back);
+        testsource_radiogroup1 = view.findViewById(R.id.testsource_radiogroup1);
+        testsource_radiogroup2 = view.findViewById(R.id.testsource_radiogroup2);
+        testsource_radiogroup3 = view.findViewById(R.id.testsource_radiogroup3);
+        testsource_radiogroup4 = view.findViewById(R.id.testsource_radiogroup4);
+        radio_gd10000 = view.findViewById(R.id.testsource_radio_gd10000);
+        radio_hunan10000 = view.findViewById(R.id.testsource_radio_hunandx);
+        radio_http = view.findViewById(R.id.testsource_radio_http);
+        radio_hxbox = view.findViewById(R.id.testsource_radio_hxbox);
+        radio_speedtest = view.findViewById(R.id.testsource_radio_speedtest);
+        radio_ftpdownload = view.findViewById(R.id.testsource_radio_ftp);
+        radio_jiangsu = view.findViewById(R.id.testsource_radio_jiangsu);
+        httpdownloadurlEditText = view.findViewById(R.id.testsource_edittext_httpdownloadUrl);
+        httpuploadurlEditText = view.findViewById(R.id.testsource_edittext_httpuploadUrl);
+        httpLinearLayout = view.findViewById(R.id.testsource_http_layout);
+        ftpLinearLayout = view.findViewById(R.id.testsource_ftp_layout);
+        ftpurlEditText = view.findViewById(R.id.testsource_edittext_ftpUrl);
+        ftpUserNameEditText = view.findViewById(R.id.testsource_edittext_ftpUserName);
+        ftpPasswordEditText = view.findViewById(R.id.testsource_edittext_ftpPassword);
+        //HX测速设置
+        hxinfo_edittext_username = view.findViewById(R.id.hxinfo_edittext_username);
+        hxinfo_edittext_userid = view.findViewById(R.id.hxinfo_edittext_userid);
+        hxinfo_edittext_userpwd = view.findViewById(R.id.hxinfo_edittext_userpwd);
+        hxinfo_edittext_worksheetnum = view.findViewById(R.id.hxinfo_edittext_worksheetnum);
+        hxinfo_button_submit = view.findViewById(R.id.hxinfo_button_submit);
+        hxinfo_button_back = view.findViewById(R.id.hxinfo_button_back);
+        //盒子信息
+        boxinfo_textview_clientversion = view.findViewById(R.id.boxinfo_textview_clientversion);
+        boxinfo_textview_boxversion = view.findViewById(R.id.boxinfo_textview_boxversion);
+        boxinfo_checkbox_boxworkmode = view.findViewById(R.id.boxinfo_checkbox_boxworkmode);
+        boxinfo_radiogroup_tcpdumpsave = view.findViewById(R.id.boxinfo_radiogroup_tcpdumpsave);
+        boxinfo_radiobutton_tcpdumpsaveatsdcard0 = view.findViewById(R.id.boxinfo_radiobutton_tcpdumpsaveatsdcard0);
+        boxinfo_radiobutton_tcpdumpsaveatsdcard1 = view.findViewById(R.id.boxinfo_radiobutton_tcpdumpsaveatsdcard1);
+        boxinfo_button_submit = view.findViewById(R.id.boxinfo_button_submit);
+        boxinfo_button_back = view.findViewById(R.id.boxinfo_button_back);
+        //文件设置
+        fileManager_bt_back = view.findViewById(R.id.fileManager_bt_back);
+        fileManager_bt_delete = view.findViewById(R.id.fileManager_bt_delete);
+        fileManager_expandableListView_showFile = view.findViewById(R.id.fileManager_expandableListView_showFile);
+        fileManager_textView_showSpace = view.findViewById(R.id.fileManager_textView_showSpace);
+        //文件导出
+        // add by hzj on 20191014
+        logExport_bt_export = view.findViewById(R.id.logExport_bt_export);
+        logExport_bt_back = view.findViewById(R.id.logExport_bt_back);
+        testsource_button_submit.setOnClickListener(view1 -> onTestsourceSubmit());
+        hxinfo_button_submit.setOnClickListener(view1 -> onHxinfoSubmit());
+        boxinfo_button_submit.setOnClickListener(view1 -> onBoxinfoSubmit());
         itemList.add(ITEM_SPEEDTEST);
         //itemList.add(ITEM_BOXUPDATE);
         itemList.add(ITEM_BOXINFO);
@@ -830,12 +851,11 @@ public class SettingFragment extends Fragment implements SettingContract.View {
 
         //add by hzj on 20191014
         logExport_bt_export.setOnClickListener(logExportClickListener);
-        getLogExport_bt_back.setOnClickListener(backClickListener);
+        logExport_bt_back.setOnClickListener(backClickListener);
         return view;
     }
 
-    @OnClick(R.id.testsource_button_submit)
-    void onTestsourceSubmit() {
+    private void onTestsourceSubmit() {
         switch (selectTestType) {
             case HTTP_DOWNLOAD:
                 httpdownloadurl = httpdownloadurlEditText.getText().toString().trim();
@@ -903,8 +923,7 @@ public class SettingFragment extends Fragment implements SettingContract.View {
                 .show();
     }
 
-    @OnClick(R.id.hxinfo_button_submit)
-    void onHxinfoSubmit() {
+   private void onHxinfoSubmit() {
         String hxusername = hxinfo_edittext_username.getText().toString().trim();
         String hxuserpwd = hxinfo_edittext_userpwd.getText().toString().trim();
         String hxuserid = hxinfo_edittext_userid.getText().toString().trim();
@@ -921,8 +940,7 @@ public class SettingFragment extends Fragment implements SettingContract.View {
                 .show();
     }
 
-    @OnClick(R.id.boxinfo_button_submit)
-    void onBoxinfoSubmit() {
+    private void onBoxinfoSubmit() {
         String boxworkmode = "0";
         String boxtcpdumpsave = "0";
         if (boxinfo_checkbox_boxworkmode.isChecked())

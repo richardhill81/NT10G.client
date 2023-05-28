@@ -39,17 +39,17 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 tools:ignore="ButtonStyle" />
-
             <Button
-                android:id="@+id/btn_access_pppoe"
-                android:text="@string/access_pppoe"
-                android:drawableTop="@drawable/btn_pppoe"
+                android:id="@+id/btn_access_static"
+                android:text="@string/access_static"
+                android:drawableTop="@drawable/btn_static"
                 android:background="@android:color/transparent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 tools:ignore="ButtonStyle" />
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -57,9 +57,9 @@
             android:padding="15dp"
             android:layout_gravity="center">
             <Button
-                android:id="@+id/btn_access_static"
-                android:text="@string/access_static"
-                android:drawableTop="@drawable/btn_static"
+                android:id="@+id/btn_access_pppoe"
+                android:text="@string/access_pppoe"
+                android:drawableTop="@drawable/btn_pppoe"
                 android:background="@android:color/transparent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

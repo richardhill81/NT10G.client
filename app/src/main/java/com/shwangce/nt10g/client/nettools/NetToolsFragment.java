@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shwangce.nt10g.client.R;
+import com.shwangce.nt10g.client.databinding.FragmentNettoolsBinding;
 import com.shwangce.nt10g.client.library.WorkUtils;
 import com.shwangce.nt10g.client.nettools.webtest.ResultListAdapter;
 import com.shwangce.nt10g.client.nettools.webtest.WebNameListAdapter;
@@ -43,9 +44,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by Administrator on 2017/2/7 0007.
  */
@@ -53,6 +51,8 @@ import butterknife.ButterKnife;
 public class NetToolsFragment extends Fragment implements NetToolsContract.View {
 
     private Context context;
+
+    //private FragmentNettoolsBinding binding;
     private Calendar calendar;
     private LinearLayout llyt_iperf_result;
     private EditText et_ping_deshost,et_ping_count,et_traceroute_host,et_pingandtraceroute_deshost,et_reping_deshost,et_timerscheduletest_deshost,et_interval,et_threshold;
@@ -465,12 +465,9 @@ public class NetToolsFragment extends Fragment implements NetToolsContract.View 
         }
     };
 
-    @BindView(R.id.nettools_flyt_testinfo)    FrameLayout flyt_testinfo;
-    @BindView(R.id.nettools_rlyt_testtype) RelativeLayout rlyt_testtype;
-    @BindView(R.id.nettools_flyt_nanjing_ping)    FrameLayout flyt_nanjingping;
-/*    @BindView(R.id.nettools_textview_pingtest) TextView tv_ping;
-    @BindView(R.id.nettools_textview_traceroute) TextView tv_traceroute;*/
-    @BindView(R.id.nettools_listview_tools) ListView lv_tools;
+    private FrameLayout flyt_testinfo,flyt_nanjingping;
+    private RelativeLayout rlyt_testtype;
+    private ListView lv_tools;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -483,7 +480,17 @@ public class NetToolsFragment extends Fragment implements NetToolsContract.View 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
         view = inflater.inflate(R.layout.fragment_nettools,container,false);
-        ButterKnife.bind(this, view);
+        /*
+        binding = FragmentNettoolsBinding.inflate(inflater,container,true);
+        flyt_testinfo =  binding.nettoolsFlytTestinfo;
+        rlyt_testtype = binding.nettoolsRlytTesttype;
+        flyt_nanjingping = binding.nettoolsFlytNanjingPing;
+        lv_tools = binding.nettoolsListviewTools;
+        */
+        flyt_testinfo = view.findViewById(R.id.nettools_flyt_testinfo);
+        rlyt_testtype = view.findViewById(R.id.nettools_rlyt_testtype);
+        flyt_nanjingping = view.findViewById(R.id.nettools_flyt_nanjing_ping);
+        lv_tools = view.findViewById(R.id.nettools_listview_tools);
         rlyt_testtype.setVisibility(View.VISIBLE);
         flyt_testinfo.setVisibility(View.GONE);
 /*        tv_ping.setOnClickListener(this);
@@ -920,7 +927,6 @@ public class NetToolsFragment extends Fragment implements NetToolsContract.View 
     }
 
     private void showPingView() {
-
         LayoutInflater inflater=LayoutInflater.from(context);
         View view =inflater.inflate(R.layout.content_pingtest,null);
         bt_start = (Button) view.findViewById(R.id.pingsource_button_start);

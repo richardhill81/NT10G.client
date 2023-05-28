@@ -9,6 +9,10 @@ import com.shwangce.nt10g.client.main.MainPresenter;
 import com.shwangce.nt10g.client.main.MainPresenterListener;
 import com.shwangce.nt10g.client.util.ProjectUtil;
 
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /**
  * Created by Administrator on 2017/3/1 0001.
@@ -32,38 +36,37 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
         @Override
         public void onUserInfo(String userString) {
             switch (testKind) {
-                case GD10000:
+                case GD10000 -> {
                     String[] s = userString.split("\\|");
                     int ll = 0;
                     String vvv = "";
                     GD10000_serveripsBean bean = new GD10000_serveripsBean();
-                    for (int vv = 0; vv < s.length; vv++) {
-                        ll = s[vv].indexOf(":");
-                        vvv = s[vv].substring(ll + 1);
-                        if (s[vv].startsWith("bandwidthDown")) {
+                    for (String value : s) {
+                        ll = value.indexOf(":");
+                        vvv = value.substring(ll + 1);
+                        if (value.startsWith("bandwidthDown")) {
                             bean.setBandwidthDown(vvv);
-                        } else if (s[vv].startsWith("bandwidthUp")) {
+                        } else if (value.startsWith("bandwidthUp")) {
                             bean.setBandwidthUp(vvv);
-                        } else if (s[vv].startsWith("account")) {
+                        } else if (value.startsWith("account")) {
                             bean.setAccount(vvv);
-                        } else if (s[vv].startsWith("city")) {
+                        } else if (value.startsWith("city")) {
                             bean.setCity(vvv);
-                        } else if (s[vv].startsWith("localIp")) {
+                        } else if (value.startsWith("localIp")) {
                             bean.setLocalIp(vvv);
-                        } else if (s[vv].startsWith("serverIpDown")) {
+                        } else if (value.startsWith("serverIpDown")) {
                             bean.setServerIpDown(vvv);
                         }
                     }
                     mView.updateUserInfo_GD10000(bean);
-                    break;
-
-                case JIANGSU10000:
+                }
+                case JIANGSU10000 -> {
                     js10000_userAuthBean = JS10000_UserAuthBean.getBeanByString(userString);
-                    if(js10000_userAuthBean != null)
+                    if (js10000_userAuthBean != null)
                         mView.updateUserInfo_JS10000(js10000_userAuthBean);
                     else
                         mView.updateUserInfo_JS10000(userString);
-                    break;
+                }
             }
         }
 
@@ -139,6 +142,8 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
         mainPresenter.removeSpeedTestListener();
     }
 
+    //forTest 20230528
+    private int dc,uc;
     @Override
     public void startTest(SpeedTestKind testKind,String additionString) {
         this.testKind = testKind;
@@ -146,84 +151,100 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
         downloadPeak = 0f;
         uploadAvg = 0f;
         uploadPeak = 0f;
+        //forTest 20230528
+        dc=0;
+        uc=0;
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(dc <30) {
+                    int random = new Random().nextInt(1000);
+                    mView.doShowDownloadSpeed(random);
+                    dc++;
+                } else if(uc < 30) {
+                    int random = new Random().nextInt(1000);
+                    mView.doShowUploadSpeed(random);
+                    uc++;
+                } else {
+                    mView.doTestspeedComplete(null);
+                }
+            }
+        },1000,1000);
+
+        return;
+        /*
         switch (testKind) {
-            case HTTP_DOWNLOAD:
+            case HTTP_DOWNLOAD -> {
                 mView.updateServerInfo(additionString);
-                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_HTTPDOWNLOAD,additionString);
+                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_HTTPDOWNLOAD, additionString);
                 mView.updateTestProgressInfo("正在连接下载服务器");
-                break;
-            case FTP_DOWNLOAD:
+            }
+            case FTP_DOWNLOAD -> {
                 int l = additionString.indexOf("|");
-                if(l >0) {
+                if (l > 0) {
                     String server = "Ftp://" + additionString.substring(0, l);
                     mView.updateServerInfo(server);
                 }
-                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_FTPDOWNLOAD,additionString);
+                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_FTPDOWNLOAD, additionString);
                 mView.updateTestProgressInfo("正在连接下载服务器");
-                break;
-
-            case HXBOX:
+            }
+            case HXBOX -> {
                 mView.updateServerInfo("华夏测速平台");
                 mView.updateTestProgressInfo("正在测试，请稍候!");
                 mView.doShowTesting();
-                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_HXBOX,additionString);
-                break;
-
-            case TCP_SPEEDTEST:
-                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_TCPSPEEDTEST,"");
+                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_HXBOX, additionString);
+            }
+            case TCP_SPEEDTEST -> {
+                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_TCPSPEEDTEST, "");
                 mView.updateTestProgressInfo("测速准备...");
-                break;
-
-            case GD10000:
+            }
+            case GD10000 -> {
                 mView.updateServerInfo("广东电信测速");
-                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_GD10000,"");
+                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_GD10000, "");
                 mView.updateTestProgressInfo("测速准备...");
-                break;
-
-            case HUNAN10000:
+            }
+            case HUNAN10000 -> {
                 String downloadUrlInfo = Hunan10000.getDownloadUrlsInfo();
                 String uploadUrlInfo = Hunan10000.getUploadUrlsInfo();
                 hunanTestStep = Hunan10000.HunanTestStep.DOWNLOAD;
-                mView.updateServerInfo(downloadUrlInfo + "\n" + uploadUrlInfo );
-                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_HTTPDOWNLOAD,Hunan10000.getDownloadsString());
+                mView.updateServerInfo(downloadUrlInfo + "\n" + uploadUrlInfo);
+                mainPresenter.doSendCommand(CommandValue.SPEEDTEST_HTTPDOWNLOAD, Hunan10000.getDownloadsString());
                 mView.updateTestProgressInfo("测速准备...");
-                break;
-
-            case JIANGSU10000:
-                if("js10000".equals(channel))
+            }
+            case JIANGSU10000 -> {
+                if ("js10000".equals(channel))
                     mView.updateServerInfo("江苏电信测速");
-                else if("ah10086".equals(channel))
+                else if ("ah10086".equals(channel))
                     mView.updateServerInfo("安徽移动测速");
                 else
                     mView.updateServerInfo("江苏电信测速");
-                mainPresenter.doSendCommand(CommandValue.JIANGSU10000_SPEEDTEST,"");
+                mainPresenter.doSendCommand(CommandValue.JIANGSU10000_SPEEDTEST, "");
                 mView.updateTestProgressInfo("测速准备...");
-                break;
+            }
         }
+
+         */
     }
 
     private void doSpeedTestSpeed(ResultBean resultBean,int type) {
-        float sp = Float.valueOf(resultBean.getResultParams());
+        float sp = Float.parseFloat(resultBean.getResultParams());
         switch (type) {
-            case DOWNLOADING:
+            case DOWNLOADING -> {
                 if (sp > downloadPeak) downloadPeak = sp;
                 mView.doShowDownloadSpeed(sp);
-                break;
-
-            case UPLOADING:
+            }
+            case UPLOADING -> {
                 if (sp > uploadPeak) uploadPeak = sp;
                 mView.doShowUploadSpeed(sp);
-                break;
-
-            case DOWNLOADED:
+            }
+            case DOWNLOADED -> {
                 downloadAvg = sp;
-                mView.doDownloadTestComplete(downloadAvg,downloadPeak);
-                break;
-
-            case UPLOADED:
+                mView.doDownloadTestComplete(downloadAvg, downloadPeak);
+            }
+            case UPLOADED -> {
                 uploadAvg = sp;
-                mView.doUploadTestComplete(uploadAvg,uploadPeak);
-                break;
+                mView.doUploadTestComplete(uploadAvg, uploadPeak);
+            }
         }
     }
 

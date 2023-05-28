@@ -16,21 +16,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
-        <include layout="@layout/content_setting_speedtest" />
+        <include android:id="@+id/include_setting_speedtest"
+            layout="@layout/content_setting_speedtest" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/setting_llyt_hxinfo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
-        <include layout="@layout/content_hxinfo"  />
+        <include android:id="@+id/include_setting_hxinfo"
+            layout="@layout/content_hxinfo"  />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/setting_llyt_boxinfo"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include layout="@layout/content_boxinfo"/>
+        <include android:id="@+id/include_setting_boxinfo"
+            layout="@layout/content_boxinfo"/>
     </LinearLayout>
 
     <LinearLayout
@@ -38,7 +41,8 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include layout="@layout/content_filemanager"/>
+        <include android:id="@+id/include_setting_filemanager"
+            layout="@layout/content_filemanager"/>
     </LinearLayout>
 
     <LinearLayout
@@ -46,7 +50,7 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include layout="@layout/content_logexport"/>
+        <include android:id="@+id/include_setting_logexport"
+            layout="@layout/content_logexport"/>
     </LinearLayout>
-
 </FrameLayout>

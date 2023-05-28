@@ -14,7 +14,6 @@ import com.shwangce.nt10g.client.setaccess.AccessType;
 import com.shwangce.nt10g.client.speedtest.SpeedTestPresenter;
 import com.shwangce.nt10g.client.util.Log;
 import com.shwangce.nt10g.client.util.ProjectUtil;
-import com.shwangce.nt10g.client.wifitest.WifiBean;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -333,6 +332,8 @@ public class MainPresenter {
                             break;
 
                         case OTA_UPDATEFAIL:
+
+                        case BOXAPP_UPDATEFAIL:
                             mainView.doShowBoxUpdateFailAlertDialog(resultBean.getResultParams());
                             break;
 
@@ -352,10 +353,6 @@ public class MainPresenter {
 
                         case BOXAPP_UPDATESTART:
                             mainView.doShowBoxUpdateAlertDialog();
-                            break;
-
-                        case BOXAPP_UPDATEFAIL:
-                            mainView.doShowBoxUpdateFailAlertDialog(resultBean.getResultParams());
                             break;
                         case TIMERSCHEDULE_SEARCHANDDELETE_SUCCESS:
                             if(netToolsListener != null) {
@@ -404,40 +401,40 @@ public class MainPresenter {
 
                         //add by hzj in 2018.12.13
                         case QUERYMEMORY_PROCESS:
-                            fileManagerListenter.showQueryMemoryProcess(resultBean.getResultParams());
+                            fileManagerListener.showQueryMemoryProcess(resultBean.getResultParams());
                             break;
                         case QUERYMEMORY_ERROR:
-                            fileManagerListenter.showQueryMemoryError(resultBean.getResultParams());
+                            fileManagerListener.showQueryMemoryError(resultBean.getResultParams());
                             break;
                         case QUERYMEMORY_SUCCESS:
-                            fileManagerListenter.showQueryMemorySuccess(resultBean.getResultParams());
+                            fileManagerListener.showQueryMemorySuccess(resultBean.getResultParams());
                             break;
                         case QUERYPACKAGEFILE_PROCESS:
-                            fileManagerListenter.showQueryPackageFileProcess(resultBean.getResultParams());
+                            fileManagerListener.showQueryPackageFileProcess(resultBean.getResultParams());
                             break;
                         case QUERYPACKAGEFILE_ERROR:
-                            fileManagerListenter.showQueryPackageFileError(resultBean.getResultParams());
+                            fileManagerListener.showQueryPackageFileError(resultBean.getResultParams());
                             break;
                         case QUERYPACKAGEFILE_SUCCESS:
-                            fileManagerListenter.showQueryPackageFileSuccess(resultBean.getResultParams());
+                            fileManagerListener.showQueryPackageFileSuccess(resultBean.getResultParams());
                             break;
                         case QUERYLOGFILE_PROCESS:
-                            fileManagerListenter.showQueryLogFileProcess(resultBean.getResultParams());
+                            fileManagerListener.showQueryLogFileProcess(resultBean.getResultParams());
                             break;
                         case QUERYLOGFILE_ERROR:
-                            fileManagerListenter.showQueryLogFileError(resultBean.getResultParams());
+                            fileManagerListener.showQueryLogFileError(resultBean.getResultParams());
                             break;
                         case QUERYLOGFILE_SUCCESS:
-                            fileManagerListenter.showQueryLogFileSuccess(resultBean.getResultParams());
+                            fileManagerListener.showQueryLogFileSuccess(resultBean.getResultParams());
                             break;
                         case DELETEFILE_PROCESS:
-                            fileManagerListenter.showDeleteFileProcess(resultBean.getResultParams());
+                            fileManagerListener.showDeleteFileProcess(resultBean.getResultParams());
                             break;
                         case DELETEFILE_ERROR:
-                            fileManagerListenter.showDeleteFileError(resultBean.getResultParams());
+                            fileManagerListener.showDeleteFileError(resultBean.getResultParams());
                             break;
                         case DELETEFILE_SUCCESS:
-                            fileManagerListenter.showDeleteFileSuccess(resultBean.getResultParams());
+                            fileManagerListener.showDeleteFileSuccess(resultBean.getResultParams());
                             break;
 
                             // add by hzj on 20191018
@@ -456,6 +453,7 @@ public class MainPresenter {
 
                         case WIFI_STARTSCAN:
                             Log.d("WIFI_STARTSCAN",resultBean.getResultParams());
+                            /*
                             if(wifiTestListener != null) {
                                 String[] startScanResult = resultBean.getResultParams().split("\\|");
                                 if (startScanResult[0].equals("1"))
@@ -469,10 +467,13 @@ public class MainPresenter {
                                     Log.w("WIFI_STARTSCAN","Unknown result : " + resultBean.getResultParams());
                                 }
                             }
+
+                             */
                             break;
 
                         case WIFI_FINDAP:
                             Log.d("WIFI_FINDAP",resultBean.getResultParams());
+                            /*
                             if(wifiTestListener != null) {
                                 String s1 = resultBean.getResultParams().replaceAll("\n","");
                                 String[] apString = s1.split("\\|");
@@ -487,10 +488,13 @@ public class MainPresenter {
                                     Log.e("WIFI_FINDAP","apString.length <3 !!!");
                                 }
                             }
+
+                             */
                             break;
 
                         case WIFI_SCANFINISH:
                             Log.d("WIFI_SCANFINISH",resultBean.getResultParams());
+                            /*
                             if(wifiTestListener != null) {
                                 String[] scanfinishString = resultBean.getResultParams().split("\\|");
                                 if (scanfinishString[0].equals("1"))
@@ -504,10 +508,13 @@ public class MainPresenter {
                                     Log.w("WIFI_SCANFINISH","Unknown result : " + resultBean.getResultParams());
                                 }
                             }
+
+                             */
                             break;
 
                         case WIFI_CONNECT:
                             Log.d("WIFI_CONNECT",resultBean.getResultParams());
+                            /*
                             if(wifiTestListener != null) {
                                 String[] connectResultString = resultBean.getResultParams().split("\\|");
                                 if (connectResultString[0].equals("1"))
@@ -521,10 +528,13 @@ public class MainPresenter {
                                     Log.w("WIFI_CONNECT","Unknown result : " + resultBean.getResultParams());
                                 }
                             }
+
+                             */
                             break;
 
                         case WIFI_STOPSCAN:
                             Log.d("WIFI_STOPSCAN",resultBean.getResultParams());
+                            /*
                             if(wifiTestListener != null) {
                                 String[] stopScanString = resultBean.getResultParams().split("\\|");
                                 if (stopScanString[0].equals("1"))
@@ -538,10 +548,13 @@ public class MainPresenter {
                                     Log.w("WIFI_STOPSCAN","Unknown result : " + resultBean.getResultParams());
                                 }
                             }
+
+                             */
                             break;
 
                         case WIFI_QUERYSTATE:
                             Log.d("WIFI_QUERYSTATE",resultBean.getResultParams());
+                            /*
                             String[] stateStrings = resultBean.getResultParams().split("\\|");
                             if(wifiTestListener != null) {
                                 if (stateStrings[0].equals("1")) {
@@ -560,12 +573,17 @@ public class MainPresenter {
                                     Log.w("WIFI_QUERYSTATE","Unknown result : " + resultBean.getResultParams());
                                 }
                             }
+
+                             */
                             break;
 
                         case WIFI_ERROR:
+                            /*
                             if(wifiTestListener != null) {
                                 wifiTestListener.getError(resultBean.getResultParams());
                             }
+
+                             */
                             break;
 
                         case MODE_SINGLELANINTERNAL:
@@ -658,7 +676,7 @@ public class MainPresenter {
     private MainPresenterListener.WebTestListener webTestListener;
     private MainPresenterListener.DnsTestListener dnsTestListener;
     //add by hzj at 2018.12.13
-    private MainPresenterListener.FileManagerListenter fileManagerListenter;
+    private MainPresenterListener.FileManagerListener fileManagerListener;
 
     //add by hzj on 20191018
     private MainPresenterListener.ExportLogListener exportLogListener;
@@ -745,10 +763,10 @@ public class MainPresenter {
         this.dnsTestListener = null;
     }
 
-    public void setFileManagerListente(MainPresenterListener.FileManagerListenter listener){
-        this.fileManagerListenter = listener;
+    public void setFileManagerListener(MainPresenterListener.FileManagerListener listener){
+        this.fileManagerListener = listener;
     }
-    public void removeFileManagerListener(){this.fileManagerListenter = null;}
+    public void removeFileManagerListener(){this.fileManagerListener = null;}
 
     //add by hzj on20191018
     public void setExportLogListener(MainPresenterListener.ExportLogListener listener){
@@ -843,12 +861,14 @@ public class MainPresenter {
         communicateModel.disconnect();
         mainView.showDeviceSelectDialog();
     }
-
+/*
     public void doShowAPInfo(WifiBean wifiBean) {
         mainView.doShowAPInfo(wifiBean);
     }
 
     public void doAPConnected(WifiBean wifiBean) {mainView.doAPConnected(wifiBean);}
+
+ */
 
     public void doSendBoxApp() {
         new Thread(new Runnable() {

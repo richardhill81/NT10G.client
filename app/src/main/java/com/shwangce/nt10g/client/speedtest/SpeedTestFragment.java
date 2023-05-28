@@ -4,10 +4,10 @@ import static com.shwangce.nt10g.client.util.ProjectUtil.K;
 import static com.shwangce.nt10g.client.util.ProjectUtil.channel;
 import static com.shwangce.nt10g.client.util.ProjectUtil.df1;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -18,8 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.webkit.ValueCallback;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -30,32 +32,18 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.shwangce.nt10g.client.R;
+import com.shwangce.nt10g.client.databinding.FragmentSpeedtestBinding;
 import com.shwangce.nt10g.client.library.FtpServerBean;
 import com.shwangce.nt10g.client.sweetalert.SweetAlertDialog;
 import com.shwangce.nt10g.client.util.Log;
 import com.shwangce.nt10g.client.util.ProjectUtil;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2017/2/7 0007.
@@ -71,11 +59,10 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
     private SpeedTestFragment instance;
     private SpeedTestContract.Presenter mPresenter;
 
+    //private FragmentSpeedtestBinding binding;
     private SpeedTestKind testKind = SpeedTestKind.Unknown;
     private String testAdditional = "";
     private SweetAlertDialog mySweetALertDialog = null;
-    private LineDataSet downloadLineDataSet = null;
-    private LineDataSet uploadLineDataSet = null;
     private List<String> jiangsu10000infodata = new ArrayList<>();
     private float lastDegree = 0f;
     private float maxSpeed = 0;
@@ -327,91 +314,29 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
             }
         }
     };
-
-
-    @BindView(R.id.textview_speedtest_testkind) TextView tv_testkind;
-    @BindView(R.id.include_speedtest_result) View content_testspeed_userinfo;
-    @BindView(R.id.textview_speedtest_serverinfo) TextView tv_server;
-
+    private View content_testspeed_userinfo;
+    private TextView tv_testkind,tv_server;
     //图表界面
-    @BindView(R.id.include_speedchart) View content_speedchart;
-    @BindView(R.id.echart_webview) WebView speedChartWebView;
-
-    //指针界面
-    @BindView(R.id.include_speedwheel) View content_speedwheel;
-    @BindView(R.id.speedwheel_img_needle) ImageView imageView_needle;
-    @BindView(R.id.speedwheel_textview_state) TextView textView_state_wheel;
-    @BindView(R.id.speedwheel_textview_speed) TextView textView_speed_wheel;
-
+    private View content_speedchart;
+    private WebView speedChartWebView;
     //上海电信测速结果界面
-    @BindView(R.id.textview_speedtest_result_worksheetnum)  TextView tv_worksheetnum;
-    @BindView(R.id.textview_speedtest_result_userid) TextView tv_userid;
-    @BindView(R.id.textview_speedtest_result_useraccount) TextView tv_useraccount;
-    @BindView(R.id.textview_speedtest_result_devicenumber) TextView tv_devicenumber;
-    @BindView(R.id.textview_speedtest_result_paydownspeed) TextView tv_paydownspeed;
-    @BindView(R.id.textview_speedtest_result_payupspeed) TextView tv_payupspeed;
-    @BindView(R.id.textview_speedtest_result_avgspeed) TextView tv_avgspeed;
-    @BindView(R.id.textview_speedtest_result_avgupspeed) TextView tv_avgupspeed;
-    @BindView(R.id.textview_speedtest_result_peakspeed) TextView tv_peakspeed;
-    @BindView(R.id.textview_speedtest_result_peakupspeed) TextView tv_peakupspeed;
-    @BindView(R.id.textview_speedtest_result_speedresult) TextView tv_speedresult;
-    @BindView(R.id.textview_speedtest_result_speedtime) TextView tv_speedtime;
-    @BindView(R.id.tablerow_speedtest_result_peakspeed) TableRow tableRow_peakspeed;
+    private TextView tv_worksheetnum,tv_userid,tv_useraccount,tv_devicenumber,tv_paydownspeed,
+            tv_payupspeed,tv_avgspeed,tv_avgupspeed,tv_peakspeed,tv_peakupspeed,tv_speedresult,
+            tv_speedtime;
+    private TableRow tableRow_peakspeed;
 
     //广东电信测速结果界面
-    @BindView(R.id.include_speedtest_result_gd10000) View content_testspeed_userinfo_gd10000;
-    @BindView(R.id.textview_speedtest_result_useraccount_gd10000) TextView gd_useraccount;
-    @BindView(R.id.textview_speedtest_result_city_gd10000) TextView gd_city;
-    @BindView(R.id.textview_speedtest_result_bandwidthDown_gd10000) TextView gd_bandwidthDown;
-    @BindView(R.id.textview_speedtest_result_bandwidthUp_gd10000) TextView gd_bandwidthUp;
-    @BindView(R.id.textview_speedtest_result_avgdownspeed_gd10000) TextView gd_avgdownspeed;
-    @BindView(R.id.textview_speedtest_result_avgupspeed_gd10000) TextView gd_avgupspeed;
-    @BindView(R.id.textview_speedtest_result_speedtime_gd10000) TextView gd_speedtime;
+    private View content_testspeed_userinfo_gd10000;
+    private TextView gd_useraccount,gd_city,gd_bandwidthDown,gd_bandwidthUp,gd_avgdownspeed,
+            gd_avgupspeed,gd_speedtime;
 
     //江苏电信测速结果界面
-    @BindView(R.id.include_speedtest_result_jiangsu10000) View content_testspeed_userinfo_js10000;
-    @BindView(R.id.textview_speedtest_result_clientIp_jiangsu10000) TextView js_clientIp;
-    @BindView(R.id.textview_speedtest_result_clientPort_jiangsu10000) TextView js_clientPort;
-    @BindView(R.id.textview_speedtest_result_cityName_jiangsu10000) TextView js_cityName;
-    @BindView(R.id.textview_speedtest_result_broadbandAccount_jiangsu10000) TextView js_broadbandAccount;
-    @BindView(R.id.textview_speedtest_result_contractRate_jiangsu10000) TextView js_contractRate;
-    @BindView(R.id.textview_speedtest_result_upRate_jiangsu10000) TextView js_upRate;
-    @BindView(R.id.textview_speedtest_result_avgdownspeed_jiangsu10000) TextView js_avgdownspeed;
-    @BindView(R.id.textview_speedtest_result_avgupspeed_jiangsu10000) TextView js_avgupspeed;
-    @BindView(R.id.textview_speedtest_result_maxdownspeed_jiangsu10000) TextView js_maxdownspeed;
-    @BindView(R.id.textview_speedtest_result_maxupspeed_jiangsu10000) TextView js_maxupspeed;
-    @BindView(R.id.textview_speedtest_result_state_jiangsu10000) TextView js_state;
-    @BindView(R.id.textview_speedtest_result_speedtime_jiangsu10000) TextView js_speedtime;
+    private View content_testspeed_userinfo_js10000;
+    private TextView js_clientIp,js_clientPort,js_cityName,js_broadbandAccount,js_contractRate,
+            js_upRate,js_avgdownspeed,js_avgupspeed,js_maxdownspeed,js_maxupspeed,js_state,
+            js_speedtime,js_upRate_server,js_contractRate_server;
 
-    @BindView(R.id.textview_speedtest_upRate_server) TextView js_upRate_server;
-    @BindView(R.id.textview_speedtest_contractRate_server) TextView js_contractRate_server;
-
-    @BindView(R.id.btn_speedtest_starttest) Button btn_testspeed;
-    @OnClick(R.id.btn_speedtest_starttest)
-    void starttestspeed(){
-        InitTestSpeed();
-        if(testKind == SpeedTestKind.HXBOX) {
-            HxBoxInfoDialog hxBoxInfoDialog = new HxBoxInfoDialog();
-            hxBoxInfoDialog.setSubmitClickListener(new HxBoxInfoDialog.OnHxBoxInfoClickListener() {
-                @Override
-                public void onClick(HxBoxInfoDialog hxBoxInfoDialog, String AdditionalInfo) {
-                    hxBoxInfoDialog.dismiss();
-                    btn_testspeed.setEnabled(false);
-                    doStartSpeedTest(AdditionalInfo);
-                }
-            });
-            hxBoxInfoDialog.show(getFragmentManager(),"HxBoxInfoDialog");
-        } else {
-            btn_testspeed.setEnabled(false);
-            maxSpeed = 0;
-            minSpeed = 0;
-            doStartSpeedTest(testAdditional);
-            // todo 增加江苏测速超时
-            if(testKind == SpeedTestKind.JIANGSU10000)
-                setTaskTimeOut(90000,testKind);
-        }
-
-    }
+    private Button btn_testspeed;
 
     // add by hzj on 20191010
     private Timer timer;   //检测超时TIMER
@@ -501,21 +426,152 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 this.testAdditional = "";
             }
         }
-        initChartView();
     }
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
         view = inflater.inflate(R.layout.fragment_speedtest,container,false);
-        ButterKnife.bind(this, view);
-        content_speedwheel.setVisibility(View.GONE);
-        content_speedchart.setVisibility(View.GONE);
+        /*
+        binding = FragmentSpeedtestBinding.inflate(inflater,container,true);
+        tv_testkind = binding.textviewSpeedtestTestkind;
+        content_testspeed_userinfo = binding.flytIncludeSpeedtestResult;
+        tv_server = binding.textviewSpeedtestServerinfo;
+        //图表界面
+        content_speedchart = binding.flytIncludeSpeedchart;
+        speedChartWebView = binding.includeSpeedchart.speedtestEchartWebview;
+        //指针界面
+        content_speedwheel = binding.flytSpeedwheel;
+        imageView_needle = binding.includeSpeedwheel.speedwheelImgNeedle;
+        textView_state_wheel = binding.includeSpeedwheel.speedwheelTextviewState;
+        textView_speed_wheel = binding.includeSpeedwheel.speedwheelTextviewSpeed;
+
+        //上海电信测速结果界面
+        tv_worksheetnum = binding.includeSpeedtestResult.textviewSpeedtestResultWorksheetnum;
+        tv_userid = binding.includeSpeedtestResult.textviewSpeedtestResultUserid;
+        tv_useraccount = binding.includeSpeedtestResult.textviewSpeedtestResultUseraccount;
+        tv_devicenumber = binding.includeSpeedtestResult.textviewSpeedtestResultDevicenumber;
+        tv_paydownspeed = binding.includeSpeedtestResult.textviewSpeedtestResultPaydownspeed;
+        tv_payupspeed = binding.includeSpeedtestResult.textviewSpeedtestResultPayupspeed;
+        tv_avgspeed = binding.includeSpeedtestResult.textviewSpeedtestResultAvgspeed;
+        tv_avgupspeed = binding.includeSpeedtestResult.textviewSpeedtestResultAvgupspeed;
+        tv_peakspeed = binding.includeSpeedtestResult.textviewSpeedtestResultPeakspeed;
+        tv_peakupspeed = binding.includeSpeedtestResult.textviewSpeedtestResultPeakupspeed;
+        tv_speedresult = binding.includeSpeedtestResult.textviewSpeedtestResultSpeedresult;
+        tv_speedtime = binding.includeSpeedtestResult.textviewSpeedtestResultSpeedtime;
+        tableRow_peakspeed = binding.includeSpeedtestResult.tablerowSpeedtestResultPeakspeed;
+
+        //广东电信测速结果界面
+        content_testspeed_userinfo_gd10000 = binding.flytIncludeSpeedtestResultGd10000;
+        gd_useraccount = binding.includeSpeedtestResultGd10000.textviewSpeedtestResultUseraccountGd10000;
+        gd_city = binding.includeSpeedtestResultGd10000.textviewSpeedtestResultCityGd10000;
+        gd_bandwidthDown = binding.includeSpeedtestResultGd10000.textviewSpeedtestResultBandwidthDownGd10000;
+        gd_bandwidthUp = binding.includeSpeedtestResultGd10000.textviewSpeedtestResultBandwidthDownGd10000;
+        gd_avgdownspeed = binding.includeSpeedtestResultGd10000.textviewSpeedtestResultAvgdownspeedGd10000;
+        gd_avgupspeed = binding.includeSpeedtestResultGd10000.textviewSpeedtestResultAvgupspeedGd10000;
+        gd_speedtime = binding.includeSpeedtestResultGd10000.textviewSpeedtestResultSpeedtimeGd10000;
+
+        //江苏电信测速结果界面
+        content_testspeed_userinfo_js10000 = binding.flytIncludeSpeedtestResultJiangsu10000;
+        js_clientIp = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestResultClientIpJiangsu10000;
+        js_clientPort = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestResultClientPortJiangsu10000;
+        js_cityName = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestResultCityNameJiangsu10000;
+        js_broadbandAccount = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestResultBroadbandAccountJiangsu10000;
+        js_contractRate = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestContractRateServer;
+        js_upRate = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestResultUpRateJiangsu10000;
+        js_avgdownspeed = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestResultAvgdownspeedJiangsu10000;
+        js_avgupspeed = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestResultAvgupspeedJiangsu10000;
+        js_maxdownspeed = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestResultMaxdownspeedJiangsu10000;
+        js_maxupspeed = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestResultMaxupspeedJiangsu10000;
+        js_state = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestResultStateJiangsu10000;
+        js_speedtime = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestResultSpeedtimeJiangsu10000;
+        js_upRate_server = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestUpRateServer;
+        js_contractRate_server = binding.includeSpeedtestResultJiangsu10000.textviewSpeedtestContractRateServer;
+        btn_testspeed = binding.btnSpeedtestStarttest;
+         */
+        tv_testkind = view.findViewById(R.id.textview_speedtest_testkind);
+        content_testspeed_userinfo = view.findViewById(R.id.flyt_speedtest_result);
+        tv_server = view.findViewById(R.id.textview_speedtest_serverinfo);
+        //图表界面
+        content_speedchart = view.findViewById(R.id.flyt_speedview);
+        speedChartWebView = view.findViewById(R.id.speedtest_echart_webview);
+        //上海电信测速结果界面
+        tv_worksheetnum = view.findViewById(R.id.textview_speedtest_result_worksheetnum);
+        tv_userid = view.findViewById(R.id.textview_speedtest_result_userid);
+        tv_useraccount = view.findViewById(R.id.textview_speedtest_result_useraccount);
+        tv_devicenumber = view.findViewById(R.id.textview_speedtest_result_devicenumber);
+        tv_paydownspeed = view.findViewById(R.id.textview_speedtest_result_paydownspeed);
+        tv_payupspeed = view.findViewById(R.id.textview_speedtest_result_payupspeed);
+        tv_avgspeed = view.findViewById(R.id.textview_speedtest_result_avgspeed);
+        tv_avgupspeed = view.findViewById(R.id.textview_speedtest_result_avgupspeed);
+        tv_peakspeed = view.findViewById(R.id.textview_speedtest_result_peakspeed);
+        tv_peakupspeed = view.findViewById(R.id.textview_speedtest_result_peakupspeed);
+        tv_speedresult = view.findViewById(R.id.textview_speedtest_result_speedresult);
+        tv_speedtime = view.findViewById(R.id.textview_speedtest_result_speedtime);
+        tableRow_peakspeed = view.findViewById(R.id.tablerow_speedtest_result_peakspeed);
+        //广东电信测速结果界面
+        content_testspeed_userinfo_gd10000 = view.findViewById(R.id.flyt_include_speedtest_result_gd10000);
+        gd_useraccount = view.findViewById(R.id.textview_speedtest_result_useraccount_gd10000);
+        gd_city = view.findViewById(R.id.textview_speedtest_result_city_gd10000);
+        gd_bandwidthDown = view.findViewById(R.id.textview_speedtest_result_bandwidthDown_gd10000);
+        gd_bandwidthUp = view.findViewById(R.id.textview_speedtest_result_bandwidthUp_gd10000);
+        gd_avgdownspeed = view.findViewById(R.id.textview_speedtest_result_avgdownspeed_gd10000);
+        gd_avgupspeed = view.findViewById(R.id.textview_speedtest_result_avgupspeed_gd10000);
+        gd_speedtime = view.findViewById(R.id.textview_speedtest_result_speedtime_gd10000);
+        //江苏电信测速结果界面
+        content_testspeed_userinfo_js10000 = view.findViewById(R.id.flyt_include_speedtest_result_jiangsu10000);
+        js_clientIp = view.findViewById(R.id.textview_speedtest_result_clientIp_jiangsu10000);
+        js_clientPort = view.findViewById(R.id.textview_speedtest_result_clientPort_jiangsu10000);
+        js_cityName = view.findViewById(R.id.textview_speedtest_result_cityName_jiangsu10000);
+        js_broadbandAccount = view.findViewById(R.id.textview_speedtest_result_broadbandAccount_jiangsu10000);
+        js_contractRate = view.findViewById(R.id.textview_speedtest_result_contractRate_jiangsu10000);
+        js_upRate = view.findViewById(R.id.textview_speedtest_result_upRate_jiangsu10000);
+        js_avgdownspeed = view.findViewById(R.id.textview_speedtest_result_avgdownspeed_jiangsu10000);
+        js_avgupspeed = view.findViewById(R.id.textview_speedtest_result_avgupspeed_jiangsu10000);
+        js_maxdownspeed = view.findViewById(R.id.textview_speedtest_result_maxdownspeed_jiangsu10000);
+        js_maxupspeed = view.findViewById(R.id.textview_speedtest_result_maxupspeed_jiangsu10000);
+        js_state = view.findViewById(R.id.textview_speedtest_result_state_jiangsu10000);
+        js_speedtime = view.findViewById(R.id.textview_speedtest_result_speedtime_jiangsu10000);
+        js_upRate_server = view.findViewById(R.id.textview_speedtest_upRate_server);
+        js_contractRate_server = view.findViewById(R.id.textview_speedtest_contractRate_server);
+        btn_testspeed = view.findViewById(R.id.btn_speedtest_starttest);
+
+        btn_testspeed.setOnClickListener(view1 -> {
+            InitTestSpeed();
+            if(testKind == SpeedTestKind.HXBOX) {
+                HxBoxInfoDialog hxBoxInfoDialog = new HxBoxInfoDialog();
+                hxBoxInfoDialog.setSubmitClickListener(new HxBoxInfoDialog.OnHxBoxInfoClickListener() {
+                    @Override
+                    public void onClick(HxBoxInfoDialog hxBoxInfoDialog, String AdditionalInfo) {
+                        hxBoxInfoDialog.dismiss();
+                        btn_testspeed.setEnabled(false);
+                        doStartSpeedTest(AdditionalInfo);
+                    }
+                });
+                hxBoxInfoDialog.show(getFragmentManager(),"HxBoxInfoDialog");
+            } else {
+                //btn_testspeed.setEnabled(false);
+                maxSpeed = 0;
+                minSpeed = 0;
+                doStartSpeedTest(testAdditional);
+                if(testKind == SpeedTestKind.JIANGSU10000)
+                    setTaskTimeOut(90000,testKind);
+            }
+        });
+
         updateTestKind(testKind,testAdditional);
-        InitTestSpeed();
-        initWheelView();
-        initChartView();
+        switch (ProjectUtil.showSpeedType) {
+            case TEXT -> {
+                InitTestSpeed();
+                content_speedchart.setVisibility(View.GONE);
+            }
+            case CHART -> {
+                initChartView();
+                content_speedchart.setVisibility(View.VISIBLE);
+            }
+        }
         return view;
     }
 
@@ -542,27 +598,18 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
 
     private void doStartSpeedTest(String testAdditional) {
         switch (ProjectUtil.showSpeedType) {
-            case TEXT:
-                content_speedwheel.setVisibility(View.GONE);
+            case TEXT -> {
                 content_speedchart.setVisibility(View.GONE);
                 mySweetALertDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
                         .setTitleText("")
                         .setContentText("");
                 mySweetALertDialog.show();
                 mySweetALertDialog.setCancelable(false);
-                break;
-
-            case CHART:
-                content_speedwheel.setVisibility(View.GONE);
+            }
+            case CHART -> {
                 content_speedchart.setVisibility(View.VISIBLE);
                 mySweetALertDialog = null;
-                break;
-
-            case NEEDLE:
-                content_speedwheel.setVisibility(View.VISIBLE);
-                content_speedchart.setVisibility(View.GONE);
-                mySweetALertDialog = null;
-                break;
+            }
         }
         speedChartWebView.evaluateJavascript("javascript:clearData()", s -> {    });
         mPresenter.startTest(testKind,testAdditional);
@@ -684,16 +731,6 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         js_contractRate_server.setText("");
     }
 
-    private void initWheelView() {
-        Matrix matrix = new Matrix();
-        Bitmap bitmap = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(),R.drawable.ic_needle)).getBitmap();
-        // 旋转60度至0
-        matrix.setRotate(60);
-        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),bitmap.getHeight(), matrix, true);
-        imageView_needle.setImageBitmap(bitmap);
-        lastDegree = 0;
-    }
-
     private void showTestSuccess(SpeedTestResultBean result) {
         switch (ProjectUtil.showSpeedType) {
             case TEXT:
@@ -760,18 +797,6 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         btn_testspeed.setEnabled(true);
     }
 
-    //设置旋转变化动画对象
-    private void updateNeedle(float speed) {
-        float mspeed = speed / (1024f * 1024f);     //转换为MB/s
-        float endDegree = (mspeed / 10f) * 20f;
-        Animation rotateAnimation = new
-                RotateAnimation(lastDegree,endDegree,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
-        rotateAnimation.setDuration(1000);              //持续时间
-        rotateAnimation.setFillAfter(true);
-        imageView_needle.startAnimation(rotateAnimation);
-        lastDegree = endDegree;
-    }
-
   /*  private void updateTestspeedInfo(String titlemsg, String contentmsg) {
         if(mySweetALertDialog != null && mySweetALertDialog.isShowing()) {
             mySweetALertDialog.setTitleText(titlemsg);
@@ -803,12 +828,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
             case CHART:
                 //textView_state_chart.setText(stateString);
                 //addEntry(lineChart,speedtype,speed);
-                break;
-
-            case NEEDLE:
-                updateNeedle(speed);
-                textView_speed_wheel.setText(speedString);
-                textView_state_wheel.setText(stateString);
+                addSpeedTestData(speedtype,speed);
                 break;
         }
 
@@ -867,9 +887,6 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
             case CHART:
                 //textView_state_chart.setText(titleText);
                 break;
-            case NEEDLE:
-                textView_state_wheel.setText(titleText);
-                break;
         }
     }
 
@@ -883,9 +900,6 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 break;
             case CHART:
                 //textView_state_chart.setText(titleText);
-                break;
-            case NEEDLE:
-                textView_state_wheel.setText(titleText);
                 break;
         }
     }
@@ -1046,7 +1060,6 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
      */
 
     private class EChartsWebViewClient extends WebViewClient {
-
         private String option;
         public EChartsWebViewClient(String option) {
             this.option = option;
@@ -1073,12 +1086,16 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         }
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void initChartView() {
-        speedChartWebView.loadUrl("file:///android_asset/index.html");
-        speedChartWebView.getSettings().setAllowFileAccess(true);
-        speedChartWebView.getSettings().setJavaScriptEnabled(true);
+        WebSettings settings = speedChartWebView.getSettings();
+        settings.setAllowFileAccess(true);
+        settings.setJavaScriptEnabled(true);
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
         speedChartWebView.setHorizontalScrollBarEnabled(false);//水平不显示
         speedChartWebView.setVerticalScrollBarEnabled(false); //垂直不显示
+        speedChartWebView.loadUrl("file:///android_asset/index.html");
         setOption(getOptionString());
     }
 
@@ -1088,24 +1105,20 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 "yAxis: {type: 'value',show: false}," +
                 "grid: { top: '80%' }," +
                 "series:[" +
-                "  {" +
-                " type: 'line'," +
-                " smooth: true," +
-                " symbol: 'none'," +
-                " seriesLayoutBy: 'row'" +
-                " }," +
                 " {" +
                 "  type: 'gauge'," +
                 "  min: 0," +
-                "  max: 1024," +
+                "  max: 1000," +
                 "  radius: '80%'," +
                 "  center: ['50%', '50%']," +
-                "  axisLine: {lineStyle: {width: 30,color: [[0.3, '#67e0e3'],[0.7, '#37a2da'],[1, '#fd666d']]}}," +
+                "  axisLine: {lineStyle: {width: 40,color: [[0.3, '#67e0e3'],[0.7, '#37a2da'],[1, '#fd666d']]}}," +
                 "  pointer: {itemStyle: {color: 'inherit'}}," +
                 "  axisTick: {distance: -30,length: 8,lineStyle: {color: '#fff',width: 2}}," +
                 "  splitLine: {distance: -30,length: 30,lineStyle: {color: '#fff',width: 4}}," +
-                "  axisLabel: {color: 'inherit',distance: 40,fontSize: 10}," +
-                "  detail: {valueAnimation: true,formatter: '{value} Mbps',color: 'inherit'}" +
+                "  axisLabel: {color: '#000',distance: 50,fontSize: 30}," +
+                "  detail: {valueAnimation: true,formatter: '{value} Mbps',color: '#37a2da'}," +
+                "  title:{ fontSize:25,color:'#37a2da'}," +
+                "  animationDuration: 800" +
                 " }" +
                 "]" +
                 "}";
@@ -1114,5 +1127,10 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
     private void setOption(String option){
         speedChartWebView.loadUrl("file:///android_asset/index.html");
         speedChartWebView.setWebViewClient(new EChartsWebViewClient(option));
+    }
+
+    private void addSpeedTestData(int dnORup,float speedData) {
+        String js = "javascript:addSpeedData(" + dnORup + "," + speedData + ")";
+        speedChartWebView.evaluateJavascript(js, s -> Log.d("addSpeedTestData","get " + js + "return: " + s ));
     }
 }

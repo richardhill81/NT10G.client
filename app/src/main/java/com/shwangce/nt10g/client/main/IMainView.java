@@ -2,7 +2,6 @@ package com.shwangce.nt10g.client.main;
 
 import com.shwangce.nt10g.client.setaccess.AccessType;
 import com.shwangce.nt10g.client.util.ProjectUtil;
-import com.shwangce.nt10g.client.wifitest.WifiBean;
 
 /**
  * Created by Administrator on 2017/2/8 0008.
@@ -27,8 +26,9 @@ public interface IMainView {
     void doShowBoxUpdateFailAlertDialog(String contentText);
     void doShowTestMode(ProjectUtil.SetModeEnum testMode);
     void doCleanTestMode();
-    void doShowAPInfo(WifiBean bean);
-    void doAPConnected(WifiBean bean);
+    //void doShowAPInfo(WifiBean bean);
+    //void doAPConnected(WifiBean bean);
+
     //void doUpdateDownloadingBar(int value);
     //void doDownloadComplete(String fileName);
     void Exit();

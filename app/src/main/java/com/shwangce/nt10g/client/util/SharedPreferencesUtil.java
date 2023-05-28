@@ -10,7 +10,6 @@ import com.shwangce.nt10g.client.setaccess.PPPoEInfoBean;
 import com.shwangce.nt10g.client.setaccess.StaticInfoBean;
 import com.shwangce.nt10g.client.speedtest.HxBoxBean;
 import com.shwangce.nt10g.client.speedtest.SpeedTestKind;
-import com.shwangce.nt10g.client.wifitest.WifiBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -262,6 +261,7 @@ public abstract class SharedPreferencesUtil {
         editor.apply();
     }
 
+    /*
     public static List<WifiBean> getApHistory(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(SharedPreferencesName, Context.MODE_PRIVATE);
         String history = preferences.getString("ap_history","");
@@ -301,6 +301,8 @@ public abstract class SharedPreferencesUtil {
         editor.putString("ap_history", history.toString());
         editor.apply();
     }
+
+     */
 
     public static String getLastEnterDeviceHistory(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(SharedPreferencesName, Context.MODE_PRIVATE);

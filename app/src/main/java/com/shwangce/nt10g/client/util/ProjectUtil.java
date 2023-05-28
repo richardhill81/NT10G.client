@@ -9,7 +9,6 @@ import com.shwangce.nt10g.client.library.FtpServerBean;
 import com.shwangce.nt10g.client.library.communicate.BoxController;
 import com.shwangce.nt10g.client.speedtest.HxBoxBean;
 import com.shwangce.nt10g.client.speedtest.SpeedTestKind;
-import com.shwangce.nt10g.client.wifitest.WifiBean;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,7 +24,7 @@ public class ProjectUtil {
 
     public static final int K = 1024;
     public static final int M = K * K;
-    public static final String DeviceName = String.valueOf(R.string.device_name);
+    public static String DeviceName = "";
     public static final String SDCardDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Shwangce";
 
     public static int APIVERSION = android.os.Build.VERSION.SDK_INT;
@@ -79,7 +78,7 @@ public class ProjectUtil {
 
     public static SetModeEnum currentMode;
 
-    public static List<WifiBean> historyApArray = null;
+    //public static List<WifiBean> historyApArray = null;
 
     public enum TabEnum {
         Testspeed,
@@ -105,8 +104,7 @@ public class ProjectUtil {
 
     public enum ShowSpeedType {
         TEXT,
-        CHART,
-        NEEDLE
+        CHART
     }
 
     // add by hzj on 20191018

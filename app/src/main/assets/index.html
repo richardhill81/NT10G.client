@@ -48,15 +48,19 @@
     </style>
 </head>
 <body>
-
+	<!--
 <div style="height:5%;">
-	<button type="button" onclick="addDataTest(1)">添加下载数据</button>
-	<button type="button" onclick="addDataTest(2)">添加上传数据</button>
+	<button type="button" onclick="addDataTest(0)">添加下载数据</button>
+	<button type="button" onclick="addDataTest(1)">添加上传数据</button>
+
 	<button type="button" onclick="showSpeedResultTest(1)">显示下载结论</button>
 	<button type="button" onclick="showSpeedResultTest(2)">显示上传结论</button>
+
 	<button type="button" onclick="clearData()">清空数据</button>
 </div>
-<div class="chart_gauge" id="chart_speed_gauge" style="height:65%;"></div>
+	-->
+<div class="chart_gauge" id="chart_speed_gauge" style="height:95%;"></div>
+<!--
 <div style="height:15%;">
 	<div style="float:left">
 		<div>
@@ -79,41 +83,46 @@
 	</div>
     <div style="float:right;width:80%;height:100%" class="chart_line" id="chart_upload_line"></div>
 </div>
+-->
 <script type="text/javascript">
     let downloadList = [];
 	let uploadList = [];
     function addSpeedData(du,data) {
-		if(du == 1)	{		//download
+		if(du == 0)	{		//download
 			downloadList.push(data)
 			speedChart.setOption({
 				series: [
-					{ data: [{value: data}]}
+					{ data: [{value: data,name:'下载测试'}]}
 					]
 				});
+				/*
 			downloadChart.setOption({
 				series: [
 					{ data: downloadList }
 				]});
+				*/
 			console.log("addDownloadData '" + data + "' Complete");
-		} else if(du == 2)	{	//upload
+		} else if(du == 1)	{	//upload
 			uploadList.push(data)
 			speedChart.setOption({
 				series: [
-					{ data: [{value: data}]}
+					{ data: [{value: data,name:'上传测试'}]}
 					]
 				});
+				/*
 			uploadChart.setOption({
 				series: [
 					{ data: uploadList }
 				]});
+				*/
 			console.log("addUpoadData '" + data + "' Complete");
 		}			
     }
 	function showSpeedResult(du,speed) {
-		if(du == 1)	{		//download
+		if(du == 0)	{		//download
 			downloadAvgLabel.innerText = speed;
 			console.log("showDownloadResult '" + speed + "'");
-		} else if(du == 2) {	//upload
+		} else if(du == 1) {	//upload
 			uploadAvgLabel.innerText = speed;
 			console.log("showUploadResult '" + speed + "'");
 		}
@@ -128,6 +137,7 @@
 				{ data: [{value: 0}]}
 				]
 			});
+			/*
 		downloadChart.setOption({
 			series: [
 				{ data: downloadList }
@@ -138,6 +148,7 @@
 			]});
 		downloadAvgLabel.innerText = "--";
 		uploadAvgLabel.innerText= "--";
+		*/
 		console.log("clearData Complete");
     }
 
@@ -181,10 +192,12 @@
     })(document, window);
 	*/
 	var speedChart = echarts.init(document.getElementById('chart_speed_gauge'));
+	/*
 	var downloadChart = echarts.init(document.getElementById('chart_download_line'));
 	var uploadChart = echarts.init(document.getElementById('chart_upload_line'));
 	var downloadAvgLabel = document.getElementById('label_download_avg');
 	var uploadAvgLabel = document.getElementById('label_upload_avg');
+
 	var option_speed = {
         series:[
             {
@@ -201,14 +214,16 @@
             }
         ]
 	};
+		*/
+	/*
 	var option_download = {
 		xAxis: {
 			type: 'category',
-//			show: false
+			show: false
 		},
 		yAxis: {
 			type: 'value',
-//			show: false
+			show: false
 		},
         series:[
 			{
@@ -222,11 +237,11 @@
 	var option_upload = {
 		xAxis: {
 			type: 'category',
-//			show: false
+			show: false
 		},
 		yAxis: {
 			type: 'value',
-//			show: false
+			show: false
 		},
 		series:[
 			{
@@ -237,6 +252,7 @@
              }
         ]
 	};
+	*/
 	
 /*	
     var option2 = {
@@ -266,9 +282,9 @@
 	};
 	 */
 
-    speedChart.setOption(option_speed);
-	downloadChart.setOption(option_download);
-	uploadChart.setOption(option_upload);
+    //speedChart.setOption(option_speed);
+	//downloadChart.setOption(option_download);
+	//uploadChart.setOption(option_upload);
 	//clearData();
 
 

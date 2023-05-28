@@ -27,7 +27,7 @@ public class SettingPresenter implements SettingContract.Presenter {
         }
     };
 
-    private final MainPresenterListener.FileManagerListenter fileManagerListenter = new MainPresenterListener.FileManagerListenter() {
+    private final MainPresenterListener.FileManagerListener FileManagerListener = new MainPresenterListener.FileManagerListener() {
         @Override
         public void showQueryMemorySuccess(String resultInfo) {
             mView.doShowQueryMemoryResult(resultInfo);
@@ -120,7 +120,7 @@ public class SettingPresenter implements SettingContract.Presenter {
     @Override
     public void start() {
         mainPresenter.setBoxSettingListener(boxSettingListener);
-        mainPresenter.setFileManagerListente(fileManagerListenter);
+        mainPresenter.setFileManagerListener(FileManagerListener);
         // add by hzj on 20191018
         mainPresenter.setExportLogListener(exportLogListener);
     }

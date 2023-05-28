@@ -16,7 +16,7 @@
         <TextView android:id="@+id/title_find_devices"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:text="@string/title_other_devices"
@@ -35,7 +35,7 @@
     <TextView android:id="@+id/title_history_devices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:textColor="@android:color/black"
@@ -54,20 +54,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"     >
+        android:layout_marginTop="10dp">
         <Button android:id="@+id/btn_scan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_scan"/>
+            android:text="@string/button_scan" />
         <Button android:id="@+id/btn_scanQR"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_scanQR" />
         <Button
             android:id="@+id/btn_enterdevice"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_enter"/>
+            android:text="@string/button_enter" />
         </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -81,6 +83,6 @@
         <Button android:id="@+id/btn_quit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_quit" />
+            android:text="@string/button_quit"/>
     </LinearLayout>
 </LinearLayout>

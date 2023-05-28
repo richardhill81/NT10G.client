@@ -20,7 +20,6 @@
             android:orientation="horizontal"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true">
-
             <TextView
                 style="@style/text_black_16_singleLine"
                 android:layout_width="wrap_content"
@@ -32,10 +31,7 @@
                 style="@style/text_black_16_singleLine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
-
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/llyt_speedtest_serverinfo"
             android:layout_below="@id/llyt_speedtest_testkind"
@@ -65,18 +61,15 @@
                 android:id="@+id/btn_speedtest_starttest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="测 试"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
         <FrameLayout
-            android:id="@+id/flyt_speedwheel"
+            android:id="@+id/flyt_speedview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/llyt_speedtest_starttest">
-            <include android:id="@+id/include_speedwheel"
-                layout="@layout/content_showtestspeed_wheel" />
             <include android:id="@+id/include_speedchart"
                 layout = "@layout/content_showtestspeed_chart" />
         </FrameLayout>
@@ -84,17 +77,33 @@
             android:id = "@+id/flyt_speedtest_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/flyt_speedwheel"
+            android:layout_below="@id/flyt_speedview"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp">
-            <include android:id="@+id/include_speedtest_result"
-                layout="@layout/content_speedtest_result" />
-            <include android:id="@+id/include_speedtest_result_gd10000"
-                layout="@layout/content_speedtest_result_gd10000"
-                android:visibility="gone"/>
-            <include android:id="@+id/include_speedtest_result_jiangsu10000"
-                layout="@layout/content_speedtest_result_jiangsu10000"
-                android:visibility="gone"/>
+            <FrameLayout
+                android:id="@+id/flyt_include_speedtest_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <include
+                    android:id="@+id/include_speedtest_result"
+                    layout="@layout/content_speedtest_result" />
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/flyt_include_speedtest_result_gd10000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <include android:id="@+id/include_speedtest_result_gd10000"
+                    layout="@layout/content_speedtest_result_gd10000"
+                    android:visibility="gone"/>
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/flyt_include_speedtest_result_jiangsu10000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <include android:id="@+id/include_speedtest_result_jiangsu10000"
+                    layout="@layout/content_speedtest_result_jiangsu10000"
+                    android:visibility="gone"/>
+            </FrameLayout>
         </FrameLayout>
 
     </RelativeLayout>

@@ -3,35 +3,11 @@ ext {
     minifyEnabled = false
     android = [
         applicationId: 'com.shwangce.nt10g.client',
-        compileSdkVersion: 28,
+        compileSdkVersion: 30,
         buildToolsVersion: "30.0.3",
         minSdkVersion    : 26,
         versionCode      : 23052201,
         versionName      : "0.0.1.01",
         flavorDimensions : "CHANNEL"
     ]
-/*
-    version = [
-            kotlin      : '1.3.71',
-            appcompat   : '1.2.0-beta01',
-            preference  : '1.1.0',
-            junit       : '4.13',
-            qmui        : '2.0.0-alpha07',
-            qmui_arch   : '2.0.0-alpha06',
-            butterknife : '10.2.1'
-    ]
-
-    dependencies = [
-            kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${version['kotlin']}" ,
-            appcompat   : "androidx.appcompat:appcompat:${version['appcompat']}",
-            preference  : "androidx.preference:preference:${version['preference']}",
-            junit       : "junit:junit:${version['junit']}",
-            qmui        : "com.qmuiteam:qmui:${version['qmui']}",
-            qmui_arch   : "com.qmuiteam:arch:${version['qmui_arch']}",
-            qmui_arch_compiler : "com.qmuiteam:arch-compiler:${version['qmui_arch']}",
-            butterknife : "com.jakewharton:butterknife:${version['butterknife']}",
-            butterknife_compiler : "com.jakewharton:butterknife-compiler:${version['butterknife']}",
-    ]
-
- */
 }

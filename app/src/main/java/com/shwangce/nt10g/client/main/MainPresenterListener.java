@@ -3,7 +3,6 @@ package com.shwangce.nt10g.client.main;
 import com.shwangce.nt10g.client.library.ControlFrame.ResultBean;
 import com.shwangce.nt10g.client.library.bluetoothLe.DeviceBean;
 import com.shwangce.nt10g.client.util.ProjectUtil;
-import com.shwangce.nt10g.client.wifitest.WifiBean;
 
 /**
  * Created by Administrator on 2017/3/10 0010.
@@ -95,6 +94,7 @@ public class MainPresenterListener {
     }
 
     public interface WifiTestListener {
+        /*
         void onStartScan(boolean isSuccess,String failReason);
         void onFindAp(WifiBean wifiBean);
         void onScanFinish(boolean isSuccess,String failReason);
@@ -102,6 +102,8 @@ public class MainPresenterListener {
         void onConnect(boolean isSuccess,String failReason);
         void onQueryState(boolean isSuccess,WifiBean bean);
         void getError(String errString);
+
+         */
     }
 
     public interface WebTestListener{
@@ -126,7 +128,7 @@ public class MainPresenterListener {
         void showDnsTest_error(String resultInfo);
     }
 
-    public interface FileManagerListenter{
+    public interface FileManagerListener{
         void showQueryMemorySuccess(String resultInfo);
         void showQueryMemoryError(String resultInfo);
         void showQueryMemoryProcess(String resultInfo);

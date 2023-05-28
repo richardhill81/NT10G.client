@@ -36,7 +36,7 @@ android {
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
             def fileName = "client_${variant.versionName}_${releaseTime()}.apk"
-            if (variant.buildType.name.equals('release')) {
+            if (variant.buildType.name == 'release') {
                 variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/Release/" + versionName)
                 fileName = "client_${variant.versionName}_${releaseTime()}_release.apk"
             }
@@ -87,8 +87,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     buildFeatures {
         viewBinding true
@@ -107,19 +107,10 @@ tasks.whenTaskAdded { task ->
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    //implementation project(':CommonLibrary:alertdialoglibrary')
-    //implementation project(':CommonLibrary:BoxLibrary')
-    //implementation project(':libzxing')
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:support-annotations:28.0.0'
     implementation 'com.android.support:design:28.0.0'
-
-    //compile 'com.google.android.gms:play-services-appindexing:9.8.0'
-    //implementation 'com.google.firebase:firebase-appindexing:10.0.0'
     implementation 'com.google.firebase:firebase-appindexing:20.0.0'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-    implementation 'com.jakewharton:butterknife:10.2.3'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.9.0'

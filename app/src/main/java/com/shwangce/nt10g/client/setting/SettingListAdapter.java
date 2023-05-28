@@ -9,12 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.shwangce.nt10g.client.R;
+import com.shwangce.nt10g.client.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016/7/22 0022.
@@ -50,8 +48,9 @@ public class SettingListAdapter extends BaseAdapter  {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder ;
         if(convertView==null){
-            convertView = inflater.inflate(R.layout.singleitem, null);
-            holder = new ViewHolder(convertView);
+            convertView = inflater.inflate(R.layout.singleitem, parent,false);
+            holder = new ViewHolder();
+            holder.name = convertView.findViewById(R.id.tv_bluetooth_devicename);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -61,10 +60,7 @@ public class SettingListAdapter extends BaseAdapter  {
         return convertView;
     }
 
-    static class ViewHolder{
-        @BindView(R.id.tv_bluetooth_devicename) TextView name;
-        public ViewHolder(View view) {
-            ButterKnife.bind(this,view);
-        }
+    static class  ViewHolder {
+        TextView name;
     }
 }

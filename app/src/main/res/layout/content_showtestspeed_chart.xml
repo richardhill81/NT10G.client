@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <WebView
-        android:id="@+id/echart_webview"
+        android:id="@+id/speedtest_echart_webview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:scrollbars="none" />
 </RelativeLayout>

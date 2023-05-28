@@ -14,8 +14,6 @@ import com.shwangce.nt10g.client.library.bluetoothLe.DeviceBean;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 /**
  * Created by Administrator on 2016/7/22 0022.
  */
@@ -49,8 +47,10 @@ public class DeviceListAdapter extends BaseAdapter  {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder ;
         if(convertView==null){
-            convertView = inflater.inflate(R.layout.device_name, null);
-            holder = new ViewHolder(convertView);
+            convertView = inflater.inflate(R.layout.device_name, parent,false);
+            holder = new ViewHolder();
+            holder.tv_devicename = convertView.findViewById(R.id.tv_bluetooth_devicename);
+            holder.tv_deviceaddress = convertView.findViewById(R.id.tv_bluetooth_deviceaddress);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -64,10 +64,7 @@ public class DeviceListAdapter extends BaseAdapter  {
     }
 
     static class ViewHolder{
-        @BindView(R.id.tv_bluetooth_devicename) TextView tv_devicename;
-        @BindView(R.id.tv_bluetooth_deviceaddress) TextView tv_deviceaddress;
-        public ViewHolder(View view) {
-            ButterKnife.bind(this,view);
-        }
+        TextView tv_devicename;
+        TextView tv_deviceaddress;
     }
 }
