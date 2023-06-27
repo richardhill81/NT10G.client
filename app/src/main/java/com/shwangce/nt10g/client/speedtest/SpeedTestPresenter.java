@@ -142,8 +142,6 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
         mainPresenter.removeSpeedTestListener();
     }
 
-    //forTest 20230528
-    private int dc,uc;
     @Override
     public void startTest(SpeedTestKind testKind,String additionString) {
         this.testKind = testKind;
@@ -151,28 +149,6 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
         downloadPeak = 0f;
         uploadAvg = 0f;
         uploadPeak = 0f;
-        //forTest 20230528
-        dc=0;
-        uc=0;
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if(dc <30) {
-                    int random = new Random().nextInt(1000);
-                    mView.doShowDownloadSpeed(random);
-                    dc++;
-                } else if(uc < 30) {
-                    int random = new Random().nextInt(1000);
-                    mView.doShowUploadSpeed(random);
-                    uc++;
-                } else {
-                    mView.doTestspeedComplete(null);
-                }
-            }
-        },1000,1000);
-
-        return;
-        /*
         switch (testKind) {
             case HTTP_DOWNLOAD -> {
                 mView.updateServerInfo(additionString);
@@ -222,8 +198,6 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
                 mView.updateTestProgressInfo("测速准备...");
             }
         }
-
-         */
     }
 
     private void doSpeedTestSpeed(ResultBean resultBean,int type) {

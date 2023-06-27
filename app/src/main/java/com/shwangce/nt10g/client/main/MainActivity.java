@@ -998,8 +998,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     private void startWork() {
         mainPresenter = new MainPresenter(context, this);
         mainPresenter.start();
-        //doSelfStartScan();
-        //showDeviceSelectDialog();
+        doSelfStartScan();
+        showDeviceSelectDialog();
     }
 
     /**

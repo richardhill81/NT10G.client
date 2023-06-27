@@ -828,7 +828,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
             case CHART:
                 //textView_state_chart.setText(stateString);
                 //addEntry(lineChart,speedtype,speed);
-                addSpeedTestData(speedtype,speed);
+                addSpeedTestData(speedtype,ProjectUtil.getMBs(speed));
                 break;
         }
 
@@ -1108,7 +1108,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 " {" +
                 "  type: 'gauge'," +
                 "  min: 0," +
-                "  max: 1000," +
+                "  max: 10000," +
                 "  radius: '80%'," +
                 "  center: ['50%', '50%']," +
                 "  axisLine: {lineStyle: {width: 40,color: [[0.3, '#67e0e3'],[0.7, '#37a2da'],[1, '#fd666d']]}}," +
