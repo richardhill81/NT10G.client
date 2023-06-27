@@ -828,7 +828,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
             case CHART:
                 //textView_state_chart.setText(stateString);
                 //addEntry(lineChart,speedtype,speed);
-                addSpeedTestData(speedtype,ProjectUtil.getMBs(speed));
+                addSpeedTestData(speedtype, 8 * ProjectUtil.getMBs(speed));
                 break;
         }
 
