@@ -33,8 +33,8 @@ android {
         }
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
             def fileName = "client_${variant.versionName}_${releaseTime()}.apk"
             if (variant.buildType.name == 'release') {
                 variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/Release/" + versionName)
@@ -94,13 +94,13 @@ android {
         viewBinding true
     }
     namespace 'com.shwangce.nt10g.client'
-    productFlavors.all {
+    productFlavors.configureEach {
         flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
     }
 
 }
 
-tasks.whenTaskAdded { task ->
+tasks.configureEach { task ->
     if (task.name.contains("ReleaseApkListingFileRedirect")) { // 过滤release
         task.enabled = false
     }
@@ -117,7 +117,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'io.reactivex:rxjava:1.3.8'
-    implementation 'com.pnikosis:materialish-progress:1.0'
+    implementation 'com.pnikosis:materialish-progress:1.7'
     implementation 'com.android.support:support-annotations:28.0.0'
     testImplementation 'junit:junit:4.13.2'
 }
