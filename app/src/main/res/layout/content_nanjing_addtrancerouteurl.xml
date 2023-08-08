@@ -12,13 +12,13 @@
             android:layout_height="wrap_content"
             android:text="地址" />
         <EditText
-            android:id="@+id/pingsource_edittext_uri"
+            android:id="@+id/traceroutesource_edittext_uri"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:inputType="textUri"
             android:text="www.baidu.com"
-            android:labelFor="@+id/pingsource_edittext_uri"/>
+            android:labelFor="@+id/traceroutesource_edittext_uri"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,14 +26,14 @@
 
 
         <Button
-            android:id="@+id/pingsource_button_start"
+            android:id="@+id/traceroutesource_button_start"
             android:text="添加"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
             android:text="返回"
-            android:id="@+id/pingsource_button_back"
+            android:id="@+id/traceroutesource_button_back"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
