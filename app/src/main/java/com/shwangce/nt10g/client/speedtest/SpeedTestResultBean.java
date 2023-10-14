@@ -19,6 +19,9 @@ public class SpeedTestResultBean {
     private String speedresult = "";
     private String speedtime = "";
 
+    //20231012 Add 延迟、丢包率
+    private String netdelay = "";
+    private String netloss = "";
     public HxBoxBean getHxbean() {
         return hxbean;
     }
@@ -126,4 +129,10 @@ public class SpeedTestResultBean {
     public void setSpeedtime(String speedtime) {
         this.speedtime = speedtime;
     }
+
+    public String getNetdelay() {return netdelay;}
+    public void setNetdelay(String netdelay) {this.netdelay = netdelay;}
+
+    public String getNetloss() { return netloss; }
+    public void setNetloss(String netloss) { this.netloss = netloss; }
 }

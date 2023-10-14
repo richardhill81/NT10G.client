@@ -1,7 +1,9 @@
 package com.shwangce.nt10g.client.speedtest;
 
 import static com.shwangce.nt10g.client.util.ProjectUtil.channel;
+import static com.shwangce.nt10g.client.util.ProjectUtil.df0;
 import static com.shwangce.nt10g.client.util.ProjectUtil.df1;
+import static com.shwangce.nt10g.client.util.ProjectUtil.df2;
 
 import com.shwangce.nt10g.client.library.ControlFrame.CommandValue;
 import com.shwangce.nt10g.client.library.ControlFrame.ResultBean;
@@ -123,6 +125,9 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
     private float downloadPeak,downloadAvg;
     private float uploadPeak,uploadAvg;
 
+    private float downloadDelay,downloadLoss;
+    private float uploadDelay,uploadLoss;
+
     private SpeedTestKind testKind;
     private Hunan10000.HunanTestStep hunanTestStep = Hunan10000.HunanTestStep.DOWNLOAD;
     private JS10000_UserAuthBean js10000_userAuthBean = null;
@@ -147,8 +152,12 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
         this.testKind = testKind;
         downloadAvg = 0f;
         downloadPeak = 0f;
+        downloadDelay = 0f;
+        downloadLoss = 0f;
         uploadAvg = 0f;
         uploadPeak = 0f;
+        uploadDelay = 0f;
+        uploadLoss = 0f;
         switch (testKind) {
             case HTTP_DOWNLOAD -> {
                 mView.updateServerInfo(additionString);
@@ -201,26 +210,63 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
     }
 
     private void doSpeedTestSpeed(ResultBean resultBean,int type) {
-        float sp = Float.parseFloat(resultBean.getResultParams());
-        switch (type) {
-            case DOWNLOADING -> {
-                if (sp > downloadPeak) downloadPeak = sp;
-                mView.doShowDownloadSpeed(sp);
+        //20231012 Add 延迟、丢包率
+        String dataString = resultBean.getResultParams();
+        if(dataString.contains("\\|"))          {    //结论中包含|字符
+            String[] d = dataString.split("\\|");
+            float sp = Float.parseFloat(d[0]);
+            switch (type) {
+                case DOWNLOADING -> {
+                    if (sp > downloadPeak) downloadPeak = sp;
+                    mView.doShowDownloadSpeed(sp);
+                }
+                case UPLOADING -> {
+                    if (sp > uploadPeak) uploadPeak = sp;
+                    mView.doShowUploadSpeed(sp);
+                }
+                case DOWNLOADED -> {
+                    downloadAvg = sp;
+                    if(d.length >= 3) {
+                        downloadDelay = Float.parseFloat(d[1]);
+                        downloadLoss = Float.parseFloat(d[2]) * 100;
+                    }
+                    mView.doDownloadTestComplete(downloadAvg, downloadPeak);
+                }
+                case UPLOADED -> {
+                    uploadAvg = sp;
+                    if(d.length >= 3) {
+                        downloadDelay = Float.parseFloat(d[1]);
+                        downloadLoss = Float.parseFloat(d[2]) * 100;
+                    }
+                    mView.doUploadTestComplete(uploadAvg, uploadPeak);
+                }
             }
-            case UPLOADING -> {
-                if (sp > uploadPeak) uploadPeak = sp;
-                mView.doShowUploadSpeed(sp);
-            }
-            case DOWNLOADED -> {
-                downloadAvg = sp;
-                mView.doDownloadTestComplete(downloadAvg, downloadPeak);
-            }
-            case UPLOADED -> {
-                uploadAvg = sp;
-                mView.doUploadTestComplete(uploadAvg, uploadPeak);
+        } else {
+            float sp = Float.parseFloat(dataString);
+            switch (type) {
+                case DOWNLOADING -> {
+                    if (sp > downloadPeak) downloadPeak = sp;
+                    mView.doShowDownloadSpeed(sp);
+                }
+                case UPLOADING -> {
+                    if (sp > uploadPeak) uploadPeak = sp;
+                    mView.doShowUploadSpeed(sp);
+                }
+                case DOWNLOADED -> {
+                    downloadAvg = sp;
+                    mView.doDownloadTestComplete(downloadAvg, downloadPeak);
+                }
+                case UPLOADED -> {
+                    uploadAvg = sp;
+                    mView.doUploadTestComplete(uploadAvg, uploadPeak);
+                }
             }
         }
+
     }
+
+
+
 
     private void doSpeedTestResult(ResultBean resultBean) {
         SpeedTestResultBean testResultBean = new SpeedTestResultBean();
@@ -319,6 +365,10 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
                 } else {
                     testResultBean.setAvgupspeed("未测试");
                     testResultBean.setPeakupspeed("未测试");
+                }
+                if(downloadDelay!=0 || uploadDelay!=0) {
+                    testResultBean.setNetdelay(df0.format((downloadDelay + uploadDelay) / 2) + "ms");
+                    testResultBean.setNetloss(df2.format((downloadLoss + uploadLoss) / 2) + "%");
                 }
                 testResultBean.setSpeedresult("测试成功");
                 break;

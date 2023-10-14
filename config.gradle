@@ -6,8 +6,8 @@ ext {
         compileSdkVersion: 30,
         buildToolsVersion: "30.0.3",
         minSdkVersion    : 26,
-        versionCode      : 23080801,
-        versionName      : "0.0.1.04",
+        versionCode      : 23101401,
+        versionName      : "0.0.2.02",
         flavorDimensions : "CHANNEL"
     ]
 }
