@@ -9,6 +9,7 @@ import com.shwangce.nt10g.client.library.ControlFrame.CommandValue;
 import com.shwangce.nt10g.client.library.ControlFrame.ResultBean;
 import com.shwangce.nt10g.client.main.MainPresenter;
 import com.shwangce.nt10g.client.main.MainPresenterListener;
+import com.shwangce.nt10g.client.util.Log;
 import com.shwangce.nt10g.client.util.ProjectUtil;
 
 import java.util.Random;
@@ -212,7 +213,8 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
     private void doSpeedTestSpeed(ResultBean resultBean,int type) {
         //20231012 Add 延迟、丢包率
         String dataString = resultBean.getResultParams();
-        if(dataString.contains("\\|"))          {    //结论中包含|字符
+        if(dataString.contains("|"))          {    //结论中包含|字符
+            Log.d("doSpeedTestSpeed","dataString is " + dataString);
             String[] d = dataString.split("\\|");
             float sp = Float.parseFloat(d[0]);
             switch (type) {
@@ -226,17 +228,23 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
                 }
                 case DOWNLOADED -> {
                     downloadAvg = sp;
+                    Log.d("doSpeedTestSpeed","d.length is " + d.length);
                     if(d.length >= 3) {
                         downloadDelay = Float.parseFloat(d[1]);
+                        Log.d("doSpeedTestSpeed","download_delay is " + downloadDelay);
                         downloadLoss = Float.parseFloat(d[2]) * 100;
+                        Log.d("doSpeedTestSpeed","download_loss is " + downloadLoss + "%");
                     }
                     mView.doDownloadTestComplete(downloadAvg, downloadPeak);
                 }
                 case UPLOADED -> {
                     uploadAvg = sp;
+                    Log.d("doSpeedTestSpeed","d.length is " + d.length);
                     if(d.length >= 3) {
-                        downloadDelay = Float.parseFloat(d[1]);
-                        downloadLoss = Float.parseFloat(d[2]) * 100;
+                        uploadDelay = Float.parseFloat(d[1]);
+                        Log.d("doSpeedTestSpeed","upload_delay is " + uploadDelay);
+                        uploadLoss = Float.parseFloat(d[2]) * 100;
+                        Log.d("doSpeedTestSpeed","upload_loss is " + uploadLoss + "%");
                     }
                     mView.doUploadTestComplete(uploadAvg, uploadPeak);
                 }
