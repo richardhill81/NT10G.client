@@ -322,9 +322,10 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
     //上海电信测速结果界面
     private TextView tv_worksheetnum,tv_userid,tv_useraccount,tv_devicenumber,tv_paydownspeed,
             tv_payupspeed,tv_avgspeed,tv_avgupspeed,tv_peakspeed,tv_peakupspeed,tv_speedresult,
-            tv_netdelay,tv_netloss,
             tv_speedtime;
-    private TableRow tableRow_peakspeed,tableRow_netdelay;
+    private TableRow tableRow_peakspeed,tableRow_netdelay,tableRow_recvOpticalPower;
+    private TextView tv_netdelay,tv_netloss;
+    private TextView tv_recvOpticalPower;
 
     //广东电信测速结果界面
     private View content_testspeed_userinfo_gd10000;
@@ -512,9 +513,14 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         tv_speedresult = view.findViewById(R.id.textview_speedtest_result_speedresult);
         tv_speedtime = view.findViewById(R.id.textview_speedtest_result_speedtime);
         tableRow_peakspeed = view.findViewById(R.id.tablerow_speedtest_result_peakspeed);
+        //延迟及丢包率
         tv_netdelay = view.findViewById(R.id.textview_speedtest_result_netdelay);
         tv_netloss = view.findViewById(R.id.textview_speedtest_result_netloss);
         tableRow_netdelay = view.findViewById(R.id.tablerow_speedtest_result_netdelay);
+        //20240121 Add 接收光功率
+        tableRow_recvOpticalPower = view.findViewById(R.id.tablerow_speedtest_result_recvOpticalPower);
+        tv_recvOpticalPower = view.findViewById(R.id.textview_speedtest_result_recvOpticalPower);
+
         //广东电信测速结果界面
         content_testspeed_userinfo_gd10000 = view.findViewById(R.id.flyt_include_speedtest_result_gd10000);
         gd_useraccount = view.findViewById(R.id.textview_speedtest_result_useraccount_gd10000);
@@ -712,6 +718,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         tv_speedtime.setText("");
         tv_netdelay.setText("");
         tv_netloss.setText("");
+        tv_recvOpticalPower.setText("");
         gd_useraccount.setText("");
         gd_city.setText("");
         gd_bandwidthDown.setText("");
@@ -781,6 +788,11 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         } else {
             tv_netdelay.setText(result.getNetdelay());
             tv_netloss.setText(result.getNetloss());
+        }
+        if(result.getReceiveOpticalPower().isEmpty()) {
+            tv_recvOpticalPower.setText("-");
+        } else {
+            tv_recvOpticalPower.setText(result.getReceiveOpticalPower());
         }
         gd_speedtime.setText(ProjectUtil.formatter.format(new Date(System.currentTimeMillis())));
         js_speedtime.setText(ProjectUtil.formatter.format(new Date(System.currentTimeMillis())));

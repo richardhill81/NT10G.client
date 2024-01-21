@@ -22,6 +22,10 @@ public class SpeedTestResultBean {
     //20231012 Add 延迟、丢包率
     private String netdelay = "";
     private String netloss = "";
+
+    //20240121 Add 接收光功率
+    private String recvOpticalPower = "";
+
     public HxBoxBean getHxbean() {
         return hxbean;
     }
@@ -135,4 +139,8 @@ public class SpeedTestResultBean {
 
     public String getNetloss() { return netloss; }
     public void setNetloss(String netloss) { this.netloss = netloss; }
+
+    public String getReceiveOpticalPower() { return recvOpticalPower;}
+    public void setReceiveOpticalPower(String receiveOpticalPower) {this.recvOpticalPower = receiveOpticalPower;}
+
 }

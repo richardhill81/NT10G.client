@@ -247,6 +247,26 @@
             android:padding="5dip" />
     </TableRow>
     <TableRow
+        android:id="@+id/tablerow_speedtest_result_recvOpticalPower"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_no_corner_without_bottom">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:text="接收光功率:"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/textview_speedtest_result_recvOpticalPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="4"
+            android:padding="5dip" />
+    </TableRow>
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/shape_no_corner_without_bottom">

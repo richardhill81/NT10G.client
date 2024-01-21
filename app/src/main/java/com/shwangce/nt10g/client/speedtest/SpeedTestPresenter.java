@@ -126,9 +126,11 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
     private float downloadPeak,downloadAvg;
     private float uploadPeak,uploadAvg;
 
-    private float downloadDelay,downloadLoss;
-    private float uploadDelay,uploadLoss;
+    private float downloadDelay,downloadLoss;   //下行延迟、下行丢包率
+    private float uploadDelay,uploadLoss;       //上行延迟、上行丢包率
 
+    //20240121 Add
+    private float d_recvOpticalPower,u_recvOpticalPower;    //接收光功率
     private SpeedTestKind testKind;
     private Hunan10000.HunanTestStep hunanTestStep = Hunan10000.HunanTestStep.DOWNLOAD;
     private JS10000_UserAuthBean js10000_userAuthBean = null;
@@ -155,10 +157,12 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
         downloadPeak = 0f;
         downloadDelay = 0f;
         downloadLoss = 0f;
+        d_recvOpticalPower = 0f;
         uploadAvg = 0f;
         uploadPeak = 0f;
         uploadDelay = 0f;
         uploadLoss = 0f;
+        u_recvOpticalPower = 0f;
         switch (testKind) {
             case HTTP_DOWNLOAD -> {
                 mView.updateServerInfo(additionString);
@@ -212,6 +216,7 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
 
     private void doSpeedTestSpeed(ResultBean resultBean,int type) {
         //20231012 Add 延迟、丢包率
+        //20240121 Add 光功率
         String dataString = resultBean.getResultParams();
         if(dataString.contains("|"))          {    //结论中包含|字符
             Log.d("doSpeedTestSpeed","dataString is " + dataString);
@@ -234,6 +239,11 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
                         Log.d("doSpeedTestSpeed","download_delay is " + downloadDelay);
                         downloadLoss = Float.parseFloat(d[2]) * 100;
                         Log.d("doSpeedTestSpeed","download_loss is " + downloadLoss + "%");
+                        //20240121 Add
+                        if(d.length >= 4) {
+                            d_recvOpticalPower = Float.parseFloat(d[3]);
+                            Log.d("doSpeedTestSpeed","downloadOpticalPower is " + d_recvOpticalPower);
+                        }
                     }
                     mView.doDownloadTestComplete(downloadAvg, downloadPeak);
                 }
@@ -245,6 +255,11 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
                         Log.d("doSpeedTestSpeed","upload_delay is " + uploadDelay);
                         uploadLoss = Float.parseFloat(d[2]) * 100;
                         Log.d("doSpeedTestSpeed","upload_loss is " + uploadLoss + "%");
+                        //20240121 Add
+                        if(d.length >= 4) {
+                            u_recvOpticalPower = Float.parseFloat(d[3]);
+                            Log.d("doSpeedTestSpeed","uploadOpticalPower is " + u_recvOpticalPower);
+                        }
                     }
                     mView.doUploadTestComplete(uploadAvg, uploadPeak);
                 }
@@ -377,6 +392,10 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
                 if(downloadDelay!=0 || uploadDelay!=0) {
                     testResultBean.setNetdelay(df0.format((downloadDelay + uploadDelay) / 2) + "ms");
                     testResultBean.setNetloss(df2.format((downloadLoss + uploadLoss) / 2) + "%");
+                }
+                //20240121 Add
+                if(d_recvOpticalPower !=0 && u_recvOpticalPower != 0) {
+                    testResultBean.setReceiveOpticalPower(df2.format((d_recvOpticalPower + u_recvOpticalPower) / 2) + "dBm");
                 }
                 testResultBean.setSpeedresult("测试成功");
                 break;
