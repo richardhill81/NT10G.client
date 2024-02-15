@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ProjectUtil {
 
-    public static final int K = 1024;
+    public static final int K = 1000;
     public static final int M = K * K;
     public static String DeviceName = "";
     public static final String SDCardDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Shwangce";
