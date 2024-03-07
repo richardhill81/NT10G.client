@@ -155,12 +155,12 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
         this.testKind = testKind;
         downloadAvg = 0f;
         downloadPeak = 0f;
-        downloadDelay = 0f;
+        downloadDelay = -999f;
         downloadLoss = 0f;
         d_recvOpticalPower = 0f;
         uploadAvg = 0f;
         uploadPeak = 0f;
-        uploadDelay = 0f;
+        uploadDelay = -999f;
         uploadLoss = 0f;
         u_recvOpticalPower = 0f;
         switch (testKind) {
@@ -389,8 +389,15 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
                     testResultBean.setAvgupspeed("未测试");
                     testResultBean.setPeakupspeed("未测试");
                 }
-                if(downloadDelay!=0 || uploadDelay!=0) {
-                    testResultBean.setNetdelay(df0.format((downloadDelay + uploadDelay) / 2) + "ms");
+                //2024.03.07,修复downloadDelay与uploadDelay均为0时，不显示延迟
+                if(downloadDelay>=0 || uploadDelay>=0) {
+                    if(downloadDelay < 0) downloadDelay = 0;
+                    if(uploadDelay < 0) uploadDelay = 0;
+                    if((downloadDelay + uploadDelay) / 2 < 1) {
+                        testResultBean.setNetdelay("<1ms");
+                    } else {
+                        testResultBean.setNetdelay(df0.format((downloadDelay + uploadDelay) / 2) + "ms");
+                    }
                     testResultBean.setNetloss(df2.format((downloadLoss + uploadLoss) / 2) + "%");
                 }
                 //20240121 Add

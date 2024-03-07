@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.shwangce.nt10g.client",
+  "variantName": "commonRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 23062701,
+      "versionName": "0.0.1.03_common",
+      "outputFile": "client_0.0.1.03_common_20230627215516_release.apk"
+    }
+  ],
+  "elementType": "File"
+}

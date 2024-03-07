@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.shwangce.nt10g.client",
+  "variantName": "debugtestRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 24012101,
+      "versionName": "0.0.3.01_debugtest",
+      "outputFile": "client_0.0.3.01_debugtest_20240121223214_release.apk"
+    }
+  ],
+  "elementType": "File"
+}
