@@ -157,12 +157,12 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
         downloadPeak = 0f;
         downloadDelay = -999f;
         downloadLoss = 0f;
-        d_recvOpticalPower = 0f;
+        d_recvOpticalPower = -1f;
         uploadAvg = 0f;
         uploadPeak = 0f;
         uploadDelay = -999f;
         uploadLoss = 0f;
-        u_recvOpticalPower = 0f;
+        u_recvOpticalPower = -1f;
         switch (testKind) {
             case HTTP_DOWNLOAD -> {
                 mView.updateServerInfo(additionString);
@@ -241,7 +241,11 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
                         Log.d("doSpeedTestSpeed","download_loss is " + downloadLoss + "%");
                         //20240121 Add
                         if(d.length >= 4) {
-                            d_recvOpticalPower = Float.parseFloat(d[3]);
+                            try {
+                                d_recvOpticalPower = Float.parseFloat(d[3]);
+                            } catch (Exception e) {
+                                d_recvOpticalPower = -1;
+                            }
                             Log.d("doSpeedTestSpeed","downloadOpticalPower is " + d_recvOpticalPower);
                         }
                     }
@@ -257,7 +261,11 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
                         Log.d("doSpeedTestSpeed","upload_loss is " + uploadLoss + "%");
                         //20240121 Add
                         if(d.length >= 4) {
-                            u_recvOpticalPower = Float.parseFloat(d[3]);
+                            try {
+                                u_recvOpticalPower = Float.parseFloat(d[3]);
+                            } catch (Exception e) {
+                                u_recvOpticalPower = -1;
+                            }
                             Log.d("doSpeedTestSpeed","uploadOpticalPower is " + u_recvOpticalPower);
                         }
                     }
@@ -401,8 +409,10 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
                     testResultBean.setNetloss(df2.format((downloadLoss + uploadLoss) / 2) + "%");
                 }
                 //20240121 Add
-                if(d_recvOpticalPower !=0 && u_recvOpticalPower != 0) {
+                if(d_recvOpticalPower >=0 && u_recvOpticalPower >= 0) {
                     testResultBean.setReceiveOpticalPower(df2.format((d_recvOpticalPower + u_recvOpticalPower) / 2) + "dBm");
+                } else {
+                    testResultBean.setReceiveOpticalPower("——");
                 }
                 testResultBean.setSpeedresult("测试成功");
                 break;
