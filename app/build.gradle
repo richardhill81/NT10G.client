@@ -6,22 +6,18 @@ static def releaseTime() {
     return new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("GMT+08:00"))
 }
 
-def root = rootProject.ext
-def cfg = root.android
-//def dpc = root.dependencies
-
 //加载签名配置
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
-    compileSdkVersion cfg.compileSdkVersion
+    compileSdk = 34
     defaultConfig {
-        applicationId cfg.applicationId
-        minSdkVersion cfg.minSdkVersion
-        versionCode cfg.versionCode
-        versionName cfg.versionName
-        flavorDimensions cfg.flavorDimensions
+        applicationId = "com.shwangce.nt10g.client"
+        minSdk = 26
+        versionCode = 24050401
+        versionName = "0.0.3.6"
+        flavorDimensions =  ["CHANNEL"]
     }
 
     signingConfigs {
@@ -57,7 +53,7 @@ android {
         }
     }
 
-    flavorDimensions "myflavor"
+    flavorDimensions = ["myflavor"]
 
     productFlavors {
         common {
@@ -92,6 +88,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
     namespace 'com.shwangce.nt10g.client'
     productFlavors.configureEach {
