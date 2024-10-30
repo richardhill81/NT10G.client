@@ -497,10 +497,12 @@ public class NetToolsFragment extends Fragment implements NetToolsContract.View 
         tv_traceroute.setOnClickListener(this);*/
         toolsList.add("PING测试");
         toolsList.add("TRACEROUTE测试");
+        /* 2024.10.30 去除下列不用的测试项目
         toolsList.add("对测");
         toolsList.add("路由跟踪");
         toolsList.add("定时测试");
         toolsList.add("网站测试");
+         */
         toolsListAdapter = new ToolsListAdapter(context, toolsList);
         lv_tools.setAdapter(toolsListAdapter);
         lv_tools.setOnItemClickListener(new AdapterView.OnItemClickListener() {

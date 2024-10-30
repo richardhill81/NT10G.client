@@ -15,8 +15,8 @@ android {
     defaultConfig {
         applicationId = "com.shwangce.nt10g.client"
         minSdk = 26
-        versionCode = 24080801
-        versionName = "0.0.3.8"
+        versionCode = 24103001
+        versionName = "1.0.0.0"
         flavorDimensions =  ["CHANNEL"]
     }
 
