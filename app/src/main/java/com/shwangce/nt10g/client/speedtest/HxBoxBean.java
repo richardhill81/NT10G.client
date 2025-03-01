@@ -22,6 +22,10 @@ public class HxBoxBean {
     private int worktype = 0;
     private String worksheetnum = "";
 
+    private int usertype = 0;   //公客：0；政企：1
+    private int upthreadnum = 4;
+    private int downthreadnum = 4;
+    private int testlong = 15;
     public HxBoxBean() {}
 
     public HxBoxBean(String name, String pwd, String userid, String worksheetnum) {
@@ -31,7 +35,8 @@ public class HxBoxBean {
         this.worksheetnum = worksheetnum;
     }
 
-    public HxBoxBean(int index, int method, String name, String pwd, String userid, int worktype, String worksheetnum) {
+    public HxBoxBean(int index, int method, String name, String pwd, String userid,
+                     int worktype, String worksheetnum) {
         this.index = index;
         this.method = method;
         this.name = name;
@@ -40,7 +45,21 @@ public class HxBoxBean {
         this.worktype = worktype;
         this.worksheetnum = worksheetnum;
     }
-
+    public HxBoxBean(int index, int method, String name, String pwd, String userid,
+                     int worktype, String worksheetnum,
+                     int usertype, int upthreadnum, int downthreadnum, int testlong) {
+        this.index = index;
+        this.method = method;
+        this.name = name;
+        this.pwd = pwd;
+        this.userid = userid;
+        this.worktype = worktype;
+        this.worksheetnum = worksheetnum;
+        this.usertype = usertype;
+        this.upthreadnum = upthreadnum;
+        this.downthreadnum = downthreadnum;
+        this.testlong = testlong;
+    }
     public int getIndex() {
         return index;
     }
@@ -97,6 +116,38 @@ public class HxBoxBean {
         this.worksheetnum = worksheetnum;
     }
 
+    public int getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(int usertype) {
+        this.usertype = usertype;
+    }
+
+    public int getUpthreadnum() {
+        return upthreadnum;
+    }
+
+    public void setUpthreadnum(int upthreadnum) {
+        this.upthreadnum = upthreadnum;
+    }
+
+    public int getDownthreadnum() {
+        return downthreadnum;
+    }
+
+    public void setDownthreadnum(int downthreadnum) {
+        this.downthreadnum = downthreadnum;
+    }
+
+    public int getTestlong() {
+        return testlong;
+    }
+
+    public void setTestlong(int testlong) {
+        this.testlong = testlong;
+    }
+
     @Override
     public String toString() {
         return getIndex() + "|" +
@@ -105,6 +156,10 @@ public class HxBoxBean {
                getPwd() + "|" +
                getUserid() + "|" +
                getWorktype() + "|" +
-               getWorksheetnum();
+               getWorksheetnum()  + "|" +
+                getUsertype() + "|" +
+                getUpthreadnum() + "|" +
+                getDownthreadnum() + "|" +
+                getTestlong();
     }
 }

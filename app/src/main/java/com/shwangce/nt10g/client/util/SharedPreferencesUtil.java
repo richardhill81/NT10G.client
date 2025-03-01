@@ -146,6 +146,10 @@ public abstract class SharedPreferencesUtil {
         editor.putString("HX_UserId", hxBoxBean.getUserid());
         editor.putString("HX_WorksheetNum",hxBoxBean.getWorksheetnum());
         editor.putInt("HX_Worktype",hxBoxBean.getWorktype());
+        editor.putInt("HX_UserType",hxBoxBean.getUsertype());
+        editor.putInt("HX_UpthreadNum", hxBoxBean.getUpthreadnum());
+        editor.putInt("HX_DownthreadNum",hxBoxBean.getDownthreadnum());
+        editor.putInt("HX_TestLong",hxBoxBean.getTestlong());
         editor.apply();
     }
 
@@ -157,6 +161,10 @@ public abstract class SharedPreferencesUtil {
         info.setUserid(preferences.getString("HX_UserId", ""));
         info.setWorksheetnum(preferences.getString("HX_WorksheetNum",""));
         info.setWorktype(preferences.getInt("HX_Worktype",0));
+        info.setUsertype(preferences.getInt("HX_UserType",0));
+        info.setUpthreadnum(preferences.getInt("HX_UpthreadNum",4));
+        info.setDownthreadnum(preferences.getInt("HX_DownthreadNum",4));
+        info.setTestlong(preferences.getInt("HX_TestLong",15));
         if(!info.getUserName().equals(""))
             return info;
         else

@@ -43,7 +43,7 @@
                 android:layout_gravity="left|center_vertical"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:text="+62"
+                android:text=""
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:visibility="invisible" />
@@ -177,10 +177,105 @@
                 />
         </FrameLayout>
         <LinearLayout
-            android:id="@+id/hxinfo_worktype_layout"
+            android:id="@+id/hxinfo_testthreadnum_layout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/hxinfo_worksheetnum_layout"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="上行线程数:">
+            </TextView>
+            <EditText
+                android:id="@+id/hxinfo_edittext_upthreadnum"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="  1~16"
+                android:inputType="number">
+            </EditText>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="下行线程数:">
+            </TextView>
+            <EditText
+                android:id="@+id/hxinfo_edittext_downthreadnum"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="  1~16"
+                android:maxLength="2">
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/hxinfo_testlong_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hxinfo_testthreadnum_layout"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="测试时长:">
+            </TextView>
+            <EditText
+                android:id="@+id/hxinfo_edittext_testlong"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="  10~20秒"
+                android:maxLength="20" >
+            </EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/hxinfo_usertype_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hxinfo_testlong_layout"
+            android:layout_marginTop="6dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:gravity="center" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="用户类型:">
+            </TextView>
+            <RadioGroup
+                android:id="@+id/hxinfo_usertype_radiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+                <RadioButton
+                    android:id="@+id/hxinfo_usertype_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:text="政企"/>
+                <RadioButton
+                    android:id="@+id/hxinfo_usertype_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:text="公客"/>
+            </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/hxinfo_worktype_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hxinfo_usertype_layout"
             android:layout_marginTop="6dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"

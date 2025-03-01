@@ -26,10 +26,26 @@ public class HxBoxInfoDialog extends BaseDialogFragment implements View.OnClickL
     private Context context;
     private Button hxinfo_button_submit,hxinfo_button_back;
     private EditText hxinfo_edittext_username,hxinfo_edittext_userid,hxinfo_edittext_userpwd,hxinfo_edittext_worksheetnum;
+    private EditText hxinfo_edittext_upthreadnum,hxinfo_edittext_downthreadnum,hxinfo_edittext_testlong;
     private RadioButton hxinfo_worktype_xz,hxinfo_worktype_wx;
+    private RadioButton hxinfo_usertype_company,hxinfo_usertype_home;
     private RadioGroup hxinfo_worktype_radiogroup;
+    private RadioGroup hxinfo_usertype_radiogroup;
     private OnHxBoxInfoClickListener submitClickListener,cancelClickListener;
     private int worktype = 0;
+    private int usertype = 0;   //公客：0，政企：1
+
+    private final int DEFAULT_UPTHREAD_NUM = 4;
+    private final int MIN_UPTHREAD_NUM = 1;
+    private final int MAX_UPTHREAD_NUM = 16;
+    private final int DEFAULT_DOWNTHREAD_NUM = 4;
+    private final int MIN_DOWNTHREAD_NUM = 1;
+    private final int MAX_DOWNTHREAD_NUM = 16;
+    private final int DEFAULT_TESTLONG = 15;
+    private final int MIN_TESTLONG = 10;
+    private final int MAX_TESTLONG = 20;
+
+
     public HxBoxInfoDialog() {
         super();
     }
@@ -50,14 +66,21 @@ public class HxBoxInfoDialog extends BaseDialogFragment implements View.OnClickL
         hxinfo_edittext_userid = (EditText)v.findViewById(R.id.hxinfo_edittext_userid);
         hxinfo_edittext_userpwd = (EditText) v.findViewById(R.id.hxinfo_edittext_userpwd);
         hxinfo_edittext_worksheetnum = (EditText) v.findViewById(R.id.hxinfo_edittext_worksheetnum);
+        hxinfo_edittext_upthreadnum = (EditText)v.findViewById(R.id.hxinfo_edittext_upthreadnum);
+        hxinfo_edittext_downthreadnum = (EditText)v.findViewById(R.id.hxinfo_edittext_downthreadnum);
+        hxinfo_edittext_testlong = (EditText)v.findViewById(R.id.hxinfo_edittext_testlong);
         hxinfo_button_submit = (Button)v.findViewById(R.id.hxinfo_button_submit);
         hxinfo_button_back = (Button)v.findViewById(R.id.hxinfo_button_back);
         hxinfo_worktype_radiogroup = (RadioGroup)v.findViewById(R.id.hxinfo_worktype_radiogroup);
         hxinfo_worktype_xz = (RadioButton)v.findViewById(R.id.hxinfo_worktype_xz);
         hxinfo_worktype_wx = (RadioButton)v.findViewById(R.id.hxinfo_worktype_wx);
+        hxinfo_usertype_radiogroup = (RadioGroup)v.findViewById(R.id.hxinfo_usertype_radiogroup);
+        hxinfo_usertype_company = (RadioButton)v.findViewById(R.id.hxinfo_usertype_company);
+        hxinfo_usertype_home = (RadioButton)v.findViewById(R.id.hxinfo_usertype_home);
         hxinfo_button_submit.setOnClickListener(this);
         hxinfo_button_back.setOnClickListener(this);
         hxinfo_worktype_radiogroup.setOnCheckedChangeListener(worktypeChangeListener);
+        hxinfo_usertype_radiogroup.setOnCheckedChangeListener(usertypeChangeListener);
         initData();
         return v;
     }
@@ -90,6 +113,19 @@ public class HxBoxInfoDialog extends BaseDialogFragment implements View.OnClickL
         }
     };
 
+    private final RadioGroup.OnCheckedChangeListener usertypeChangeListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            switch (checkedId) {
+                case R.id.hxinfo_usertype_home:
+                    usertype = 0;
+                    break;
+                case R.id.hxinfo_usertype_company:
+                    worktype = 1;
+                    break;
+            }
+        }
+    };
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -98,6 +134,10 @@ public class HxBoxInfoDialog extends BaseDialogFragment implements View.OnClickL
                 String hxuserpwd = hxinfo_edittext_userpwd.getText().toString().trim();
                 String hxuserid = hxinfo_edittext_userid.getText().toString().trim();
                 String hxworksheetnum = hxinfo_edittext_worksheetnum.getText().toString().trim();
+                String hxupthreadnumString = hxinfo_edittext_upthreadnum.getText().toString().trim();
+                String hxdownthreadnumString = hxinfo_edittext_downthreadnum.getText().toString().trim();
+                String hxtestlongString = hxinfo_edittext_testlong.getText().toString().trim();
+                int hxupthreadnum,hxdownthreadnum,hxtestlong;
                 HxBoxBean hxBoxBean = null;
                 if(hxusername.isEmpty() && hxuserid.isEmpty() && hxuserpwd.isEmpty() && hxworksheetnum.isEmpty()) {
                     toStartTest("");
@@ -111,6 +151,61 @@ public class HxBoxInfoDialog extends BaseDialogFragment implements View.OnClickL
                         hxBoxBean.setUserid(hxuserid);
                         hxBoxBean.setWorksheetnum(hxworksheetnum);
                         hxBoxBean.setWorktype(worktype);
+                        hxBoxBean.setUsertype(usertype);
+                        if(hxupthreadnumString.isEmpty()) hxupthreadnum = DEFAULT_UPTHREAD_NUM;
+                        else {
+                            try {
+                                hxupthreadnum = Integer.parseInt(hxupthreadnumString);
+                                if(hxupthreadnum < MIN_UPTHREAD_NUM || hxupthreadnum > MAX_UPTHREAD_NUM) {
+                                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                                            .setTitleText("上行线程数范围为1~16，请核对！")
+                                            .show();
+                                    break;
+                                }
+                            } catch (NumberFormatException e) {
+                                Log.i("HxBoxInfoDialog","hxupthreadnum is " + hxupthreadnumString);
+                                new SweetAlertDialog(context,SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("上行线程数输入错误，请核对！")
+                                        .show();
+                                break;
+                            }
+                        }
+                        if(hxdownthreadnumString.isEmpty()) hxdownthreadnum = DEFAULT_DOWNTHREAD_NUM;
+                        else {
+                            try {
+                                hxdownthreadnum = Integer.parseInt(hxdownthreadnumString);
+                                if(hxdownthreadnum < MIN_DOWNTHREAD_NUM || hxdownthreadnum > MAX_DOWNTHREAD_NUM) {
+                                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                                            .setTitleText("下行线程数范围为1~16，请核对！")
+                                            .show();
+                                    break;
+                                }
+                            } catch (NumberFormatException e) {
+                                Log.i("HxBoxInfoDialog","hxdownthreadnum is " + hxdownthreadnumString);
+                                new SweetAlertDialog(context,SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("下行线程数输入错误，请核对！")
+                                        .show();
+                                break;
+                            }
+                        }
+                        if(hxtestlongString.isEmpty()) hxtestlong = DEFAULT_TESTLONG;
+                        else {
+                            try {
+                                hxtestlong = Integer.parseInt(hxtestlongString);
+                                if(hxtestlong < MIN_TESTLONG || hxtestlong > MAX_TESTLONG) {
+                                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                                            .setTitleText("测试时长范围为10~20秒，请核对！")
+                                            .show();
+                                    break;
+                                }
+                            } catch (NumberFormatException e) {
+                                Log.i("HxBoxInfoDialog","hxtestlongString is " + hxtestlongString);
+                                new SweetAlertDialog(context,SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("测试时长输入错误，请核对！")
+                                        .show();
+                                break;
+                            }
+                        }
                         ProjectUtil.hxBoxBean = hxBoxBean;
                         SharedPreferencesUtil.setHxUserInfo(context,hxBoxBean);
                         toStartTest(hxBoxBean.toString());
@@ -187,17 +282,29 @@ public class HxBoxInfoDialog extends BaseDialogFragment implements View.OnClickL
             setEditTextValue(hxinfo_edittext_userid,ProjectUtil.hxBoxBean.getUserid());
             setEditTextValue(hxinfo_edittext_userpwd,ProjectUtil.hxBoxBean.getPwd());
             setEditTextValue(hxinfo_edittext_worksheetnum,ProjectUtil.hxBoxBean.getWorksheetnum());
+            setEditTextValue(hxinfo_edittext_upthreadnum,ProjectUtil.hxBoxBean.getUpthreadnum()+ "");
+            setEditTextValue(hxinfo_edittext_downthreadnum,ProjectUtil.hxBoxBean.getDownthreadnum() + "");
+            setEditTextValue(hxinfo_edittext_testlong,ProjectUtil.hxBoxBean.getTestlong() + "");
             if(ProjectUtil.hxBoxBean.getWorktype() == 0) {
                 hxinfo_worktype_xz.setChecked(true);
             } else {
                 hxinfo_worktype_wx.setChecked(true);
+            }
+            if(ProjectUtil.hxBoxBean.getUsertype() == 0) {
+                hxinfo_usertype_home.setChecked(true);
+            } else {
+                hxinfo_usertype_company.setChecked(true);
             }
         } else {
             setEditTextValue(hxinfo_edittext_username,"");
             setEditTextValue(hxinfo_edittext_userid,"");
             setEditTextValue(hxinfo_edittext_userpwd,"");
             setEditTextValue(hxinfo_edittext_worksheetnum,"");
+            setEditTextValue(hxinfo_edittext_upthreadnum,"");
+            setEditTextValue(hxinfo_edittext_downthreadnum,"");
+            setEditTextValue(hxinfo_edittext_testlong,"");
             hxinfo_worktype_xz.setChecked(true);
+            hxinfo_usertype_home.setChecked(true);
         }
         hxinfo_button_submit.setText("确认");
         hxinfo_button_back.setText("返回");
@@ -208,6 +315,19 @@ public class HxBoxInfoDialog extends BaseDialogFragment implements View.OnClickL
             editText.setText(value);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private int getValueString(String valueString) {
+        boolean ret = false;
+        int value = -99;
+        try {
+            value = Integer.parseInt(valueString);
+            return value;
+        } catch (NumberFormatException e) {
+            Log.w("checkNumberValid","输入内容非数字");
+            e.printStackTrace();
+            return -99;
         }
     }
 }
