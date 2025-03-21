@@ -121,7 +121,7 @@ public class HxBoxInfoDialog extends BaseDialogFragment implements View.OnClickL
                     usertype = 0;
                     break;
                 case R.id.hxinfo_usertype_company:
-                    worktype = 1;
+                    usertype = 1;
                     break;
             }
         }
@@ -206,6 +206,9 @@ public class HxBoxInfoDialog extends BaseDialogFragment implements View.OnClickL
                                 break;
                             }
                         }
+                        hxBoxBean.setUpthreadnum(hxupthreadnum);
+                        hxBoxBean.setDownthreadnum(hxdownthreadnum);
+                        hxBoxBean.setTestlong(hxtestlong);
                         ProjectUtil.hxBoxBean = hxBoxBean;
                         SharedPreferencesUtil.setHxUserInfo(context,hxBoxBean);
                         toStartTest(hxBoxBean.toString());

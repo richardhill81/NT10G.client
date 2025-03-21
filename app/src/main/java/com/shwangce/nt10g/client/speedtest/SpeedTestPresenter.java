@@ -179,7 +179,7 @@ public class SpeedTestPresenter implements SpeedTestContract.Presenter{
                 mView.updateTestProgressInfo("正在连接下载服务器");
             }
             case HXBOX -> {
-                mView.updateServerInfo("华夏测速平台");
+                mView.updateServerInfo("上海平台");
                 mView.updateTestProgressInfo("正在测试，请稍候!");
                 mView.doShowTesting();
                 mainPresenter.doSendCommand(CommandValue.SPEEDTEST_HXBOX, additionString);

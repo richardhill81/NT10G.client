@@ -935,9 +935,12 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         this.testAdditional = testAdditional;
         switch (testKind) {
             case HTTP_DOWNLOAD:
+                ProjectUtil.showSpeedType = ProjectUtil.ShowSpeedType.CHART;
                 content_testspeed_userinfo.setVisibility(View.VISIBLE);
                 content_testspeed_userinfo_gd10000.setVisibility(View.GONE);
                 content_testspeed_userinfo_js10000.setVisibility(View.GONE);
+                tableRow_netdelay.setVisibility(View.VISIBLE);
+                tableRow_recvOpticalPower.setVisibility(View.VISIBLE);
                 tv_testkind.setText("HTTP下载测速");
                 break;
 
@@ -955,9 +958,12 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 break;
 
             case HXBOX:
+                ProjectUtil.showSpeedType = ProjectUtil.ShowSpeedType.CHART;
                 content_testspeed_userinfo.setVisibility(View.VISIBLE);
                 content_testspeed_userinfo_gd10000.setVisibility(View.GONE);
                 content_testspeed_userinfo_js10000.setVisibility(View.GONE);
+                tableRow_netdelay.setVisibility(View.GONE);
+                tableRow_recvOpticalPower.setVisibility(View.GONE);
                 tv_testkind.setText("上海电信测速");
                 break;
 
