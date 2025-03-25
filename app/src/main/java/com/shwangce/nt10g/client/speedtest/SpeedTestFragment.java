@@ -572,16 +572,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
         });
 
         updateTestKind(testKind,testAdditional);
-        switch (ProjectUtil.showSpeedType) {
-            case TEXT -> {
-                InitTestSpeed();
-                content_speedchart.setVisibility(View.GONE);
-            }
-            case CHART -> {
-                initChartView();
-                content_speedchart.setVisibility(View.VISIBLE);
-            }
-        }
+
         return view;
     }
 
@@ -593,7 +584,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
 
     //public void setTesttype(SpeedTestKind testKind,String HttpDownloadSource, FtpServerBean ftpServerBean,HxBoxBean hxBoxBean) {
     public void setTesttype(SpeedTestKind testKind,String HttpDownloadSource, FtpServerBean ftpServerBean,HxBoxBean hxBoxBean) {
-            if(testKind == SpeedTestKind.HXBOX)
+        if(testKind == SpeedTestKind.HXBOX)
             if(hxBoxBean != null)
                 updateTestKind(testKind,hxBoxBean.toString());
             else
@@ -950,6 +941,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 content_testspeed_userinfo_js10000.setVisibility(View.GONE);
                 tv_testkind.setText("FTP下载测速");
                 break;
+
             case TCP_SPEEDTEST:
                 content_testspeed_userinfo.setVisibility(View.VISIBLE);
                 content_testspeed_userinfo_gd10000.setVisibility(View.GONE);
@@ -958,7 +950,7 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 break;
 
             case HXBOX:
-                ProjectUtil.showSpeedType = ProjectUtil.ShowSpeedType.CHART;
+                ProjectUtil.showSpeedType = ProjectUtil.ShowSpeedType.TEXT;
                 content_testspeed_userinfo.setVisibility(View.VISIBLE);
                 content_testspeed_userinfo_gd10000.setVisibility(View.GONE);
                 content_testspeed_userinfo_js10000.setVisibility(View.GONE);
@@ -999,6 +991,17 @@ public class SpeedTestFragment extends Fragment implements SpeedTestContract.Vie
                 content_testspeed_userinfo_js10000.setVisibility(View.GONE);
                 tv_testkind.setText("其他测速");
                 break;
+        }
+        switch (ProjectUtil.showSpeedType) {
+            case TEXT -> {
+                InitTestSpeed();
+                content_speedchart.setVisibility(View.GONE);
+            }
+            case CHART -> {
+                initChartView();
+                InitTestSpeed();
+                content_speedchart.setVisibility(View.VISIBLE);
+            }
         }
     }
 
