@@ -121,7 +121,6 @@
                 android:id="@+id/hxinfo_edittext_userid"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:hint="工号"
                 android:paddingRight="60dp"
                 android:maxLength="20"
